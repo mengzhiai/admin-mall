@@ -1,0 +1,89 @@
+@charset "UTF-8";
+html,
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+textarea,
+p,
+blockquote,
+th,
+td {
+  font-family: "Microsoft Yahei", "微软雅黑", arial, "\5b8b\4f53";
+  margin: 0;
+  padding: 0;
+}
+
+.xm-container {
+  margin: 0 10px;
+}
+
+.xm-container .search {
+  padding: 15px;
+  background-color: #fff;
+  border: 1px solid #dcdee2;
+  border-color: #e8eaec;
+}
+
+.xm-container .search:hover {
+  box-shadow: 0 1px 6px #ccc;
+  border-color: #eee;
+}
+
+.xm-container .search .el-form-item {
+  margin-bottom: 0;
+}
+
+.xm-content .xm-table {
+  margin-top: 10px;
+  background-color: #fff;
+  padding: 15px;
+}
+
+.xm-content .xm-table .el-table th,
+.xm-content .xm-table .el-table td {
+  text-align: center;
+}
+
+.xm-content .xm-page {
+  display: flex;
+  justify-content: center;
+  padding: 0 0 10px;
+  background-color: #fff;
+}
+
+.flex {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+}
+
+.flex-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+}
