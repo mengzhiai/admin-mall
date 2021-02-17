@@ -2,7 +2,7 @@
  * @Date: 2021-02-10 22:53:38
  * @Description: 产品管理
  * @LastEditors: jun
- * @LastEditTime: 2021-02-18 01:06:48
+ * @LastEditTime: 2021-02-18 01:09:56
  * @FilePath: \admin-mall\src\views\productManagement\product\productIndex.vue
 -->
 <template>
@@ -33,7 +33,6 @@
 
 </div>
 </template>
-
 <script>
 import tableList from './tableList';
 import paging from '@/components/paging/paging';
