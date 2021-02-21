@@ -2,7 +2,7 @@
  * @Date: 2021-02-14 12:26:53
  * @Description: table
  * @LastEditors: jun
- * @LastEditTime: 2021-02-21 00:10:17
+ * @LastEditTime: 2021-02-21 00:12:44
  * @FilePath: \admin-mall\src\views\productManagement\product\tableList.vue
 -->
 <template>
@@ -26,7 +26,7 @@
     <el-table-column prop="" label="添加日期" min-width="100">
     </el-table-column>
     <el-table-column prop="" label="状态" min-width="100"> </el-table-column>
-    <el-table-column prop="" label="操作" width="150">
+    <el-table-column prop="" label="操作" width="150" fixed="right">
       <template slot-scope="scope">
         <el-button type="primary" size="small" @click="editRow(scope.row.id, 'edit')">编辑</el-button>
         <el-button type="danger" size="small" @click="editRow(scope.row.id, 'delete')">删除</el-button>
