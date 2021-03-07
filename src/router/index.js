@@ -2,12 +2,11 @@
  * @Date: 2021-02-10 22:49:04
  * @Description: 路由
  * @LastEditors: jun
- * @LastEditTime: 2021-02-14 12:26:41
+ * @LastEditTime: 2021-03-06 14:10:24
  * @FilePath: \admin-mall\src\router\index.js
  */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
 
@@ -20,7 +19,7 @@ const routes = [
   {
     path: '/home',
     name: 'home',
-    // redirect: '/login',
+    redirect: 'product',
     meta: { title: '首页' },
     component: () => import('../views/home/index'),
     children: [
@@ -41,7 +40,6 @@ const routes = [
       {
         path: '/category',
         name: 'category',
-        meta: { title: '分类管理', auth: true },
         component: () => import('../views/productManagement/category/categoryIndex'),
         meta: [
           {
@@ -49,6 +47,32 @@ const routes = [
           },
           {
             title: '分类管理'
+          }
+        ],
+      },
+      {
+        path: '/employee',
+        name: 'employee',
+        component: () => import('../views/setup/employee'),
+        meta: [
+          {
+            title: '设置'
+          },
+          {
+            title: '员工管理'
+          }
+        ],
+      },
+      {
+        path: '/userManagement',
+        name: 'userManagement',
+        component: () => import('../views/setup/userManagement'),
+        meta: [
+          {
+            title: '设置'
+          },
+          {
+            title: '用户管理'
           }
         ],
       }

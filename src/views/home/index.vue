@@ -2,7 +2,7 @@
  * @Date: 2021-02-12 23:55:32
  * @Description: 主页
  * @LastEditors: jun
- * @LastEditTime: 2021-02-13 14:48:21
+ * @LastEditTime: 2021-03-06 14:13:13
  * @FilePath: \admin-mall\src\views\home\index.vue
 -->
 <template>
@@ -62,6 +62,21 @@ export default {
             {
               childrenIndex: "2-2",
               childName: "订单处理",
+            },
+          ],
+        },
+        {
+          menuIndex: "3",
+          name: "设置",
+          children: [{
+              childrenIndex: "3-1",
+              childName: "员工管理",
+              nameVal: "employee",
+            },
+            {
+              childrenIndex: "3-2",
+              childName: "用户管理",
+              nameVal: "userManagement",
             },
           ],
         },

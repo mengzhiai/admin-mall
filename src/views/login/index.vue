@@ -2,7 +2,7 @@
  * @Date: 2021-02-10 23:25:14
  * @Description: 登录
  * @LastEditors: jun
- * @LastEditTime: 2021-02-14 15:46:02
+ * @LastEditTime: 2021-03-06 13:42:01
  * @FilePath: \admin-mall\src\views\login\index.vue
 -->
 <template>
@@ -64,7 +64,7 @@ export default {
     loginFun() {
       this.$refs.loginForm.validate((valid) => {
         login(this.loginForm).then((res) => {
-          if(res.code === 200) {
+          if (res.code === 200) {
             localStorage.setItem('token', "Bearer " + res.data);
             this.$router.push({
               name: 'home'
@@ -92,9 +92,11 @@ export default {
 }
 
 .content {
-  // padding: 50px 0;
-  height: calc(100vh - 100px);
+  width: 100%;
   background-color: #ebfdff;
+  padding-top: 200px;
+  height: calc(100vh - 150px);
+  box-sizing: border-box;
 }
 
 .login-box {
