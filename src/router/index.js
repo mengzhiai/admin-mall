@@ -2,7 +2,7 @@
  * @Date: 2021-02-10 22:49:04
  * @Description: 路由
  * @LastEditors: jun
- * @LastEditTime: 2021-03-06 14:10:24
+ * @LastEditTime: 2021-03-10 23:23:17
  * @FilePath: \admin-mall\src\router\index.js
  */
 import Vue from 'vue'
@@ -12,14 +12,14 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/login',
+    path: '/',
     name: 'login',
     component: () => import('../views/login')
   },
   {
     path: '/home',
     name: 'home',
-    redirect: 'product',
+    // redirect: 'product',
     meta: { title: '首页' },
     component: () => import('../views/home/index'),
     children: [

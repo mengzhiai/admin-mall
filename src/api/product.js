@@ -2,7 +2,7 @@
  * @Date: 2021-02-13 14:36:34
  * @Description: 产品管理
  * @LastEditors: jun
- * @LastEditTime: 2021-02-15 14:47:27
+ * @LastEditTime: 2021-03-11 00:54:25
  * @FilePath: \admin-mall\src\api\product.js
  */
 import baseUrl from './baseUrl'
@@ -38,3 +38,10 @@ export function productUpdate(data) {
 export function productDelete(data) {
   return post(baseUrl.api + '/product/delete', data)
 }
+
+
+// 获取分类列表
+export function classifyList(data) {
+  return get(baseUrl.api + '/product/classify', data)
+}
+
