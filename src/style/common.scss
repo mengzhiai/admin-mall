@@ -49,29 +49,27 @@ td {
   }
 }
 
-.xm-content {
-  .xm-table {
-    margin-top: 10px;
-    // border: 1px solid #dcdee2;
-    // border-color: #e8eaec;
-    background-color: #fff;
-    padding: 15px;
+.xm-table {
+  margin-top: 10px;
+  // border: 1px solid #dcdee2;
+  // border-color: #e8eaec;
+  background-color: #fff;
+  padding: 15px;
 
-    .el-table {
+  .el-table {
 
-      th,
-      td {
-        text-align: center;
-      }
+    th,
+    td {
+      text-align: center;
     }
   }
+}
 
-  .xm-page {
-    display: flex;
-    justify-content: center;
-    padding: 0 0 10px;
-    background-color: #fff;
-  }
+.xm-page {
+  display: flex;
+  justify-content: center;
+  padding: 0 0 10px;
+  background-color: #fff;
 }
 
 

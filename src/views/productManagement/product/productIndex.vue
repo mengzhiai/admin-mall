@@ -2,27 +2,25 @@
  * @Date: 2021-02-10 22:53:38
  * @Description: 产品管理
  * @LastEditors: jun
- * @LastEditTime: 2021-02-21 00:05:23
+ * @LastEditTime: 2021-03-13 12:51:55
  * @FilePath: \admin-mall\src\views\productManagement\product\productIndex.vue
 -->
 <template>
 <div class="product xm-container">
   <el-form class="search" :model="searchForm" ref="searchForm" label-width="80px" :inline="true" size="small">
-    <el-form-item label="商品搜索:">
+    <el-form-item>
+      <el-button type="primary" @click="addFun">添加商品</el-button>
+    </el-form-item>
+    <el-form-item label="商品搜索:" label-width="150px">
       <el-input v-model="searchForm.keywords" placeholder="关键字"></el-input>
     </el-form-item>
     <el-form-item>
       <el-button type="primary" @click="search">搜索</el-button>
       <el-button type="default" @click="reset">重置</el-button>
     </el-form-item>
-    <el-form-item label-width="200">
-      <el-button type="primary" @click="addFun">添加商品</el-button>
-    </el-form-item>
   </el-form>
-  <div class="xm-content">
-    <tableList ref="tableList" @editRow="editRow"></tableList>
-    <paging :pageSize="tablePage.pageSize" :totalNum="tablePage.total" :currentPage="tablePage.currentPage" @currentChange="currentChange"></paging>
-  </div>
+  <tableList ref="tableList" @editRow="editRow"></tableList>
+  <paging :pageSize="tablePage.pageSize" :totalNum="tablePage.total" :currentPage="tablePage.currentPage" @currentChange="currentChange"></paging>
   <el-dialog title="添加/编辑" :visible.sync="editDialog" width="800px" :close-on-click-modal="false">
     <edit ref="edit" v-if="editDialog"></edit>
     <div class="flex-center">
@@ -33,6 +31,7 @@
 
 </div>
 </template>
+
 <script>
 import tableList from './tableList';
 import paging from '@/components/paging/paging';
@@ -42,7 +41,8 @@ import {
   productAdd,
   productDetail,
   productUpdate,
-  productDelete
+  productDelete,
+  classifyList
 } from '@/api/product'
 export default {
   components: {
@@ -61,13 +61,28 @@ export default {
       tablePage: {
 
       },
+      categoryList: [],
       editDialog: false
     };
   },
   mounted() {
+    this.getCategoryList();
     this.getList(1);
   },
   methods: {
+    // 获取分类列表
+    getCategoryList() {
+      let params = {
+        page: 1,
+        limit: 20,
+        keywords: ''
+      }
+      classifyList(params).then(res => {
+        if (res.code === 200) {
+          this.categoryList = res.data.rows;
+        }
+      })
+    },
     getList(page) {
       let params = {
         page: page,
@@ -128,13 +143,16 @@ export default {
     // 添加商品
     addFun() {
       this.editDialog = true;
+      this.$nextTick(() => {
+        this.$refs.edit.categoryList = this.categoryList;
+      })
     },
 
     // 编辑/删除
     editRow(id, type) {
       if (type === 'edit') {
         this.getDetail(id);
-      } else if(type === 'delete') {
+      } else if (type === 'delete') {
         this.deleteRow(id);
       }
     },
@@ -144,7 +162,10 @@ export default {
       this.editDialog = true;
       productDetail(id).then(res => {
         if (res.code === 200) {
-          this.$refs.edit.editForm = res.data;
+          this.$nextTick(() => {
+            this.$refs.edit.editForm = res.data;
+            this.$refs.edit.categoryList = this.categoryList;
+          })
         }
       })
     },
@@ -154,13 +175,13 @@ export default {
       let val = this.$refs.edit.validateFrom();
       let params = this.$refs.edit.editForm;
       let picList = this.$refs.edit.fileList;
-      
+
       if (!val) {
         this.$message.warning('请将必填项填写完整');
         return
       }
 
-      if(picList.length) {
+      if (picList.length) {
         params.img = picList[0].response.url;
       }
 
@@ -176,7 +197,7 @@ export default {
       } else {
         // 编辑
         productUpdate(params).then(res => {
-          if(res.code === 200) {
+          if (res.code === 200) {
             this.getList(1);
             this.editDialog = false;
             this.$message.success(res.msg);

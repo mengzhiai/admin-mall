@@ -2,7 +2,7 @@
  * @Date: 2021-02-10 23:25:14
  * @Description: 登录
  * @LastEditors: jun
- * @LastEditTime: 2021-03-06 13:42:01
+ * @LastEditTime: 2021-03-13 10:58:36
  * @FilePath: \admin-mall\src\views\login\index.vue
 -->
 <template>
@@ -24,7 +24,7 @@
           <el-input v-model="loginForm.userName"></el-input>
         </el-form-item>
         <el-form-item prop="password">
-          <el-input v-model="loginForm.password"></el-input>
+          <el-input type="password" v-model="loginForm.password" @keyup.enter.native="loginFun"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="loginFun" style="width: 100%">登录</el-button>

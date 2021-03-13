@@ -2,7 +2,7 @@
  * @Date: 2021-02-10 22:49:04
  * @Description: 路由
  * @LastEditors: jun
- * @LastEditTime: 2021-03-10 23:23:17
+ * @LastEditTime: 2021-03-13 13:14:12
  * @FilePath: \admin-mall\src\router\index.js
  */
 import Vue from 'vue'
@@ -28,27 +28,52 @@ const routes = [
         name: 'product',
         meta: { title: '产品管理', auth: true },
         component: () => import('../views/productManagement/product/productIndex'),
-        meta: [
-          {
-            title: '商品管理'
-          },
-          {
-            title: '产品管理'
-          }
-        ],
+        meta: {
+          auth: true,
+          crumbsList: [
+            {
+              title: '商品管理'
+            },
+            {
+              title: '产品管理'
+            }
+          ]
+        }
       },
       {
         path: '/category',
         name: 'category',
         component: () => import('../views/productManagement/category/categoryIndex'),
-        meta: [
-          {
-            title: '商品管理'
-          },
-          {
-            title: '分类管理'
-          }
-        ],
+        meta: {
+          auth: true,
+          crumbsList: [
+            {
+              title: '商品管理'
+            },
+            {
+              title: '分类管理'
+            }
+          ]
+        }
+      },
+      {
+        path: '/goodsList',
+        name: 'goodsList',
+        component: () => import('../views/productManagement/category/detail/goodsList'),
+        meta: {
+          auth: true,
+          crumbsList: [
+            {
+              title: '商品管理'
+            },
+            {
+              title: '分类管理'
+            },
+            {
+              title: '商品管理'
+            }
+          ]
+        }
       },
       {
         path: '/employee',
@@ -67,14 +92,17 @@ const routes = [
         path: '/userManagement',
         name: 'userManagement',
         component: () => import('../views/setup/userManagement'),
-        meta: [
-          {
-            title: '设置'
-          },
-          {
-            title: '用户管理'
-          }
-        ],
+        meta: {
+          auth: true,
+          crumbsList: [
+            {
+              title: '设置'
+            },
+            {
+              title: '用户管理'
+            }
+          ]
+        }
       }
     ]
   },
@@ -89,11 +117,11 @@ export default router
 
 
 router.beforeEach((to, from, next) => {
-  if(to.path == '/login') {
+  if (to.path == '/login') {
     next();
   } else {
     let token = localStorage.getItem('token');
-    if(!token) {
+    if (!token) {
       next('/login');
     } else {
       next();
@@ -104,6 +132,6 @@ router.beforeEach((to, from, next) => {
 
 
 const originalPush = VueRouter.prototype.push
-   VueRouter.prototype.push = function push(location) {
-   return originalPush.call(this, location).catch(err => err)
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
 }

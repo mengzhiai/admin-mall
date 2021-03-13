@@ -2,7 +2,7 @@
  * @Date: 2021-02-12 23:55:32
  * @Description: 主页
  * @LastEditors: jun
- * @LastEditTime: 2021-03-06 14:13:13
+ * @LastEditTime: 2021-03-13 13:09:38
  * @FilePath: \admin-mall\src\views\home\index.vue
 -->
 <template>
@@ -12,10 +12,10 @@
   </div>
   <div class="container flex">
     <div class="menu">
-      <el-menu class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
+      <el-menu class="menu-list" @open="handleOpen" @close="handleClose" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
         <el-submenu :index="item.menuIndex" v-for="(item, index) in menuList" :key="index">
           <template slot="title">{{ item.name }}</template>
-          <el-menu-item :index="ele.childrenIndex" v-for="(ele, i) in item.children" :key="i" @click="clickMenu(ele)">{{ ele.childName }}</el-menu-item>
+          <el-menu-item class="item" :index="ele.childrenIndex" v-for="(ele, i) in item.children" :key="i" @click="clickMenu(ele)">{{ ele.childName }}</el-menu-item>
         </el-submenu>
       </el-menu>
     </div>
@@ -23,7 +23,7 @@
       <div class="crumbs">
         <el-breadcrumb separator="/">
           <el-breadcrumb-item>首页</el-breadcrumb-item>
-          <el-breadcrumb-item v-for="(item,i) in $route.meta" :key="i">{{item.title}}</el-breadcrumb-item>
+          <el-breadcrumb-item v-for="(item,i) in $route.meta.crumbsList" :key="i">{{item.title}}</el-breadcrumb-item>
           <!-- <el-breadcrumb-item v-for="(item,i) in $route.meta" :key="i" :to="{path: item.url}">{{item.title}}</el-breadcrumb-item> -->
         </el-breadcrumb>
       </div>
@@ -129,5 +129,12 @@ export default {
 
 .router-view {
   margin: 10px 0;
+}
+
+
+.menu-list {
+  .item {
+    cursor: pointer;
+  }
 }
 </style>

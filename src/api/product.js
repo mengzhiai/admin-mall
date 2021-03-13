@@ -2,7 +2,7 @@
  * @Date: 2021-02-13 14:36:34
  * @Description: 产品管理
  * @LastEditors: jun
- * @LastEditTime: 2021-03-11 00:54:25
+ * @LastEditTime: 2021-03-13 14:02:06
  * @FilePath: \admin-mall\src\api\product.js
  */
 import baseUrl from './baseUrl'
@@ -42,6 +42,17 @@ export function productDelete(data) {
 
 // 获取分类列表
 export function classifyList(data) {
-  return get(baseUrl.api + '/product/classify', data)
+  return get(baseUrl.api + '/classify/list', data)
 }
 
+// 添加分类
+export function addClassify(data) {
+  return post(baseUrl.api + '/classify/add', data)
+}
+
+
+// 分类下的商品列表
+
+export function goodsList(id) {
+  return get(baseUrl.api + '/classify/goodsList', {id})
+}

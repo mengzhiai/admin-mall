@@ -50,18 +50,18 @@ td {
   margin-bottom: 0;
 }
 
-.xm-content .xm-table {
+.xm-table {
   margin-top: 10px;
   background-color: #fff;
   padding: 15px;
 }
 
-.xm-content .xm-table .el-table th,
-.xm-content .xm-table .el-table td {
+.xm-table .el-table th,
+.xm-table .el-table td {
   text-align: center;
 }
 
-.xm-content .xm-page {
+.xm-page {
   display: flex;
   justify-content: center;
   padding: 0 0 10px;

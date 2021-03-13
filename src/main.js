@@ -2,7 +2,7 @@
  * @Date: 2021-02-10 22:49:04
  * @Description: 
  * @LastEditors: jun
- * @LastEditTime: 2021-02-21 00:07:34
+ * @LastEditTime: 2021-03-13 11:36:18
  * @FilePath: \admin-mall\src\main.js
  */
 import Vue from 'vue'
@@ -26,7 +26,12 @@ Viewer.setDefaults({
 
 Vue.config.productionTip = false;
 
-Vue.prototype.$uploadUrl = baseUrl.uploadUrl
+Vue.prototype.$uploadUrl = baseUrl.uploadUrl;
+
+// 公用混入
+// 防止重复提交混入
+import mixin from './utils/mixin.js'
+Vue.use(mixin)
 
 Vue.use(ElementUI)
 

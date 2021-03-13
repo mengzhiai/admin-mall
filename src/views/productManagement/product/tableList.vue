@@ -2,7 +2,7 @@
  * @Date: 2021-02-14 12:26:53
  * @Description: table
  * @LastEditors: jun
- * @LastEditTime: 2021-02-21 00:12:44
+ * @LastEditTime: 2021-03-13 14:11:27
  * @FilePath: \admin-mall\src\views\productManagement\product\tableList.vue
 -->
 <template>
@@ -21,9 +21,12 @@
     </el-table-column>
     <el-table-column prop="productPrice" label="产品价格" min-width="100">
     </el-table-column>
-    <el-table-column prop="categoryId" label="产品分类" min-width="100">
+    <el-table-column label="产品分类" min-width="100">
+      <template slot-scope="scope">
+        <span>{{getType(scope.row.category)}}</span>
+      </template>
     </el-table-column>
-    <el-table-column prop="" label="添加日期" min-width="100">
+    <el-table-column prop="createTime" label="添加日期" min-width="100">
     </el-table-column>
     <el-table-column prop="" label="状态" min-width="100"> </el-table-column>
     <el-table-column prop="" label="操作" width="150" fixed="right">
@@ -46,6 +49,13 @@ export default {
   methods: {
     editRow(id, type) {
       this.$emit("editRow", id, type);
+    },
+
+    // 获取分类列表
+    getType(val) {
+      let list = this.$parent.categoryList;
+      let strVal = list.find((item) => val == item.id);
+      return strVal.name;
     },
   },
 };
