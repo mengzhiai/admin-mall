@@ -2,7 +2,7 @@
  * @Date: 2021-02-14 12:39:02
  * @Description: 新增/编辑
  * @LastEditors: jun
- * @LastEditTime: 2021-03-20 23:15:55
+ * @LastEditTime: 2021-03-20 23:35:43
  * @FilePath: \admin-mall\src\views\productManagement\product\edit.vue
 -->
 <template>
@@ -89,7 +89,23 @@ export default {
       },
       fileList: [],
       categoryList: [],
-      statusList: [],
+      statusList: [{
+          id: 1,
+          name: '在售'
+        },
+        {
+          id: 2,
+          name: '下架'
+        },
+        {
+          id: 3,
+          name: '无货'
+        },
+        {
+          id: 4,
+          name: '预约'
+        }
+      ],
       rules: {
         productName: [{
           required: false,
@@ -115,7 +131,6 @@ export default {
     };
   },
   mounted() {
-    this.statusList = this.$parent.statusList;
     this.getCategoryType();
   },
   methods: {

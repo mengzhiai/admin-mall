@@ -2,7 +2,7 @@
  * @Date: 2021-02-13 13:43:53
  * @Description: 分类管理
  * @LastEditors: jun
- * @LastEditTime: 2021-03-13 23:08:45
+ * @LastEditTime: 2021-03-20 23:44:20
  * @FilePath: \admin-mall\src\views\productManagement\category\categoryIndex.vue
 -->
 <template>
@@ -12,7 +12,7 @@
       <el-button type="primary" @click="add">添加分类</el-button>
     </el-form-item>
     <el-form-item label="分类名称:" label-width="150px">
-      <el-input v-model="searchForm.keywords"></el-input>
+      <el-input v-model="searchForm.keywords" placeholder="请输入分类名称" clearable></el-input>
     </el-form-item>
     <el-form-item>
       <el-button type="primary" @click="getList(1)">搜索</el-button>

@@ -2,7 +2,7 @@
  * @Date: 2021-02-10 22:53:38
  * @Description: 产品管理
  * @LastEditors: jun
- * @LastEditTime: 2021-03-20 23:14:29
+ * @LastEditTime: 2021-03-20 23:39:06
  * @FilePath: \admin-mall\src\views\productManagement\product\productIndex.vue
 -->
 <template>
@@ -12,7 +12,7 @@
       <el-button type="primary" @click="addFun">添加商品</el-button>
     </el-form-item>
     <el-form-item label="商品搜索:" label-width="150px">
-      <el-input v-model="searchForm.keywords" placeholder="关键字"></el-input>
+      <el-input v-model="searchForm.keywords" placeholder="关键字搜索" clearable></el-input>
     </el-form-item>
     <el-form-item>
       <el-button type="primary" @click="search">搜索</el-button>
