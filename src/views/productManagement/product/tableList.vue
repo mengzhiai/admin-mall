@@ -2,7 +2,7 @@
  * @Date: 2021-02-14 12:26:53
  * @Description: table
  * @LastEditors: jun
- * @LastEditTime: 2021-03-20 23:19:45
+ * @LastEditTime: 2021-03-21 01:05:38
  * @FilePath: \admin-mall\src\views\productManagement\product\tableList.vue
 -->
 <template>
@@ -10,7 +10,7 @@
   <el-table :data="tableData" border stripe height="calc(100vh - 280px)">
     <el-table-column prop="productName" label="产品名称" min-width="100">
     </el-table-column>
-    <el-table-column prop="test" label="产品编号" min-width="100">
+    <el-table-column prop="test" label="商品编号" min-width="100">
     </el-table-column>
     <el-table-column prop="img" label="缩略图" min-width="100">
       <template slot-scope="scope">
@@ -19,7 +19,7 @@
         </viewer>
       </template>
     </el-table-column>
-    <el-table-column prop="productPrice" label="产品价格" min-width="100">
+    <el-table-column prop="productPrice" label="商品价格" min-width="100">
     </el-table-column>
     <el-table-column label="产品分类" min-width="100">
       <template slot-scope="scope">

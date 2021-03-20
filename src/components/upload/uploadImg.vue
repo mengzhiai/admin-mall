@@ -2,18 +2,27 @@
  * @Date: 2021-03-20 14:16:22
  * @Description: 图片上传
  * @LastEditors: jun
- * @LastEditTime: 2021-03-20 14:45:45
+ * @LastEditTime: 2021-03-21 01:16:43
  * @FilePath: \admin-mall\src\components\upload\uploadImg.vue
 -->
 <template>
-<div class="upload-img">
-  <el-upload :action="$uploadUrl" list-type="picture-card" :limit="limitLen" :class="{'no-upload':uploadImgList.length == limitLen}" :on-success="onSuccess" :on-preview="handlePictureCardPreview" :on-remove="handleRemove">
-    <i class="el-icon-plus"></i>
-  </el-upload>
-  <el-dialog :visible.sync="dialogVisible" append-to-body>
-    <img width="100%" :src="dialogImageUrl" alt="">
-  </el-dialog>
-</div>
+  <div class="upload-img">
+    <el-upload
+      :action="$uploadUrl"
+      list-type="picture-card"
+      :limit="limitLen"
+      :class="{ 'no-upload': uploadImgList.length == limitLen }"
+      :on-success="onSuccess"
+      :before-upload="beforeUpload"
+      :on-preview="handlePictureCardPreview"
+      :on-remove="handleRemove"
+    >
+      <i class="el-icon-plus"></i>
+    </el-upload>
+    <el-dialog :visible.sync="dialogVisible" append-to-body>
+      <img width="100%" :src="dialogImageUrl" alt="" />
+    </el-dialog>
+  </div>
 </template>
 
 <script>
@@ -22,8 +31,8 @@ export default {
     // 图片上传个数限制
     limitLen: {
       type: Number,
-      default: 1
-    }
+      default: 1,
+    },
   },
   data() {
     return {
@@ -33,31 +42,35 @@ export default {
         module: 4,
       },
       uploadImgList: [],
-      dialogImageUrl: '',
-      dialogVisible: false
+      dialogImageUrl: "",
+      dialogVisible: false,
     };
   },
   methods: {
-    handleAvatarSuccess(res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw);
-      this.$emit("successImg", res.url);
+    handleRemove(file, fileList) {
+      console.log(file, fileList);
     },
-    beforeAvatarUpload(file) {
+
+    // 上传之前
+    beforeUpload(file) {
+      console.log('file', file);
       const isJPG = file.type === "image/jpeg";
+      const isPng = file.type === 'image/png';
       const isLt2M = file.size / 1024 / 1024 < 2;
 
-      /* if (!isJPG) {
-        this.$message.error('上传头像图片只能是 JPG 格式!');
-      } */
+      if(isJPG || isJPG) {
+        this.$message.error('请上传图片');
+        return
+      }
+
       if (!isLt2M) {
         this.$message.error("上传头像图片大小不能超过 2MB!");
       }
       return isJPG && isLt2M;
+
     },
 
-    handleRemove(file, fileList) {
-      console.log(file, fileList);
-    },
+    // 查看图片
     handlePictureCardPreview(file) {
       this.dialogImageUrl = file.url;
       this.dialogVisible = true;
@@ -66,8 +79,8 @@ export default {
     onSuccess(response, file, fileList) {
       console.log(response, file, fileList);
       this.uploadImgList = fileList;
-      this.$emit('successImg', response.url)
-    }
+      this.$emit("successImg", response.url);
+    },
   },
 };
 </script>

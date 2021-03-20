@@ -2,7 +2,7 @@
  * @Date: 2021-02-14 12:39:02
  * @Description: 新增/编辑
  * @LastEditors: jun
- * @LastEditTime: 2021-03-20 23:35:43
+ * @LastEditTime: 2021-03-21 01:00:42
  * @FilePath: \admin-mall\src\views\productManagement\product\edit.vue
 -->
 <template>
@@ -11,20 +11,19 @@
     <el-row>
       <el-col :span="12">
         <el-form-item label="商品名称:" prop="productName">
-          <el-input v-model="editForm.productName"></el-input>
+          <el-input v-model="editForm.productName" placeholder="商品名称"></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="12">
         <el-form-item label="商品价格:" prop="productPrice">
-          <el-input v-model="editForm.productPrice"></el-input>
+          <el-input v-model="editForm.productPrice" placeholder="商品价格"></el-input>
         </el-form-item>
       </el-col>
     </el-row>
     <el-row>
       <el-col :span="12">
         <el-form-item label="商品分类:" prop="category">
-          <!-- <el-input v-model="editForm.category"></el-input> -->
-          <el-select v-model="editForm.category" value-key="" placeholder="商品分类" filterable>
+          <el-select v-model="editForm.category" placeholder="商品分类" filterable>
             <el-option v-for="item in categoryList" :key="item.id" :label="item.name" :value="item.id">
             </el-option>
           </el-select>
@@ -32,7 +31,7 @@
       </el-col>
       <el-col :span="12">
         <el-form-item label="商品数量:" prop="amount">
-          <el-input v-model="editForm.amount"></el-input>
+          <el-input v-model="editForm.amount" placeholder="商品数量"></el-input>
         </el-form-item>
       </el-col>
     </el-row>
