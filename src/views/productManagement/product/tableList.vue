@@ -2,7 +2,7 @@
  * @Date: 2021-02-14 12:26:53
  * @Description: table
  * @LastEditors: jun
- * @LastEditTime: 2021-03-13 14:11:27
+ * @LastEditTime: 2021-03-20 23:19:45
  * @FilePath: \admin-mall\src\views\productManagement\product\tableList.vue
 -->
 <template>
@@ -28,7 +28,11 @@
     </el-table-column>
     <el-table-column prop="createTime" label="添加日期" min-width="100">
     </el-table-column>
-    <el-table-column prop="" label="状态" min-width="100"> </el-table-column>
+    <el-table-column label="状态" min-width="100">
+      <template slot-scope="scope">
+        <span>{{getStatus(scope.row.status)}}</span>
+      </template>
+    </el-table-column>
     <el-table-column prop="" label="操作" width="150" fixed="right">
       <template slot-scope="scope">
         <el-button type="primary" size="small" @click="editRow(scope.row.id, 'edit')">编辑</el-button>
@@ -54,9 +58,15 @@ export default {
     // 获取分类列表
     getType(val) {
       let list = this.$parent.categoryList;
-      let strVal = list.find((item) => val == item.id);
+      let strVal = list.find((item) => val === item.id);
       return strVal.name;
     },
+
+    getStatus(val) {
+      let list = this.$parent.statusList;
+      let item =  list.find((item) => item.id === val);
+      return item.name
+    }
   },
 };
 </script>

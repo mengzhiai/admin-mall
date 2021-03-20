@@ -87,3 +87,22 @@ td {
   display: flex;
   justify-content: space-between;
 }
+
+.upload-img .el-upload--picture-card {
+  width: 100px;
+  height: 100px;
+  line-height: 100px;
+}
+
+.upload-img .el-upload-list--picture-card .el-upload-list__item {
+  width: 100px;
+  height: 100px;
+}
+
+.no-upload .avatar-uploader-icon,
+.no-upload .el-upload--picture-card {
+  display: none;
+  width: 100px;
+  height: 100px;
+  line-height: 100px;
+}

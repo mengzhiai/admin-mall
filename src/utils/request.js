@@ -2,7 +2,7 @@
  * @Date: 2021-02-10 23:04:50
  * @Description: 
  * @LastEditors: jun
- * @LastEditTime: 2021-02-18 00:52:11
+ * @LastEditTime: 2021-03-20 23:21:06
  * @FilePath: \admin-mall\src\utils\request.js
  */
 
@@ -192,7 +192,7 @@ service.interceptors.response.use(
     } else if(res.code == 401){
       Message.error(res.msg);
       router.replace({
-        path:'/login'
+        path:'/'
       })
     } else {
       Message.error(res.msg);

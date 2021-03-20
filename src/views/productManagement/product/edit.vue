@@ -2,7 +2,7 @@
  * @Date: 2021-02-14 12:39:02
  * @Description: 新增/编辑
  * @LastEditors: jun
- * @LastEditTime: 2021-03-13 22:40:35
+ * @LastEditTime: 2021-03-20 23:15:55
  * @FilePath: \admin-mall\src\views\productManagement\product\edit.vue
 -->
 <template>
@@ -10,59 +10,73 @@
   <el-form :model="editForm" ref="editForm" :rules="rules" label-width="120px" size="medium">
     <el-row>
       <el-col :span="12">
-        <el-form-item label="产品名称:" prop="productName">
+        <el-form-item label="商品名称:" prop="productName">
           <el-input v-model="editForm.productName"></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="12">
-        <el-form-item label="产品编号:">
-          <el-input v-model="editForm.test"></el-input>
+        <el-form-item label="商品价格:" prop="productPrice">
+          <el-input v-model="editForm.productPrice"></el-input>
         </el-form-item>
       </el-col>
     </el-row>
     <el-row>
       <el-col :span="12">
-        <el-form-item label="产品价格:" prop="productPrice">
-          <el-input v-model="editForm.productPrice"></el-input>
-        </el-form-item>
-      </el-col>
-      <el-col :span="12">
-        <el-form-item label="产品分类:" prop="category">
+        <el-form-item label="商品分类:" prop="category">
           <!-- <el-input v-model="editForm.category"></el-input> -->
           <el-select v-model="editForm.category" value-key="" placeholder="商品分类" filterable>
             <el-option v-for="item in categoryList" :key="item.id" :label="item.name" :value="item.id">
             </el-option>
           </el-select>
-
+        </el-form-item>
+      </el-col>
+      <el-col :span="12">
+        <el-form-item label="商品数量:" prop="amount">
+          <el-input v-model="editForm.amount"></el-input>
         </el-form-item>
       </el-col>
     </el-row>
     <el-row>
       <el-col :span="12">
-        <el-form-item label="产品数量:" prop="amount">
-          <el-input v-model="editForm.amount"></el-input>
+        <el-form-item label="商品状态:">
+          <el-select v-model="editForm.status" value-key="" placeholder="商品分类" filterable>
+            <el-option v-for="item in statusList" :key="item.id" :label="item.name" :value="item.id">
+            </el-option>
+          </el-select>
         </el-form-item>
       </el-col>
       <el-col :span="12">
-        <el-form-item label="产品状态:">
-          <el-input v-model="editForm.status"></el-input>
+        <el-form-item label="是否新品:">
+          <el-radio-group v-model="editForm.isNew">
+            <el-radio :label="1">是</el-radio>
+            <el-radio :label="2">否</el-radio>
+          </el-radio-group>
+
         </el-form-item>
       </el-col>
     </el-row>
-    <el-form-item label="产品图片:" size="normal">
-      <el-upload :action="$uploadUrl" :show-file-list="false" :file-list="fileList" list-type="picture-card" :on-success="onSuccess" :before-upload="beforeAvatarUpload">
-        <i class="el-icon-plus"></i>
-      </el-upload>
+    <el-form-item label="商品图片:">
+      <upload-img @successImg="successImg" :limitLen="1"></upload-img>
+    </el-form-item>
+    <el-form-item label="商品展示图:">
+      <upload-img :limitLen="4"></upload-img>
+    </el-form-item>
+    <el-form-item label="商品详情图:">
+      <upload-img :limitLen="8"></upload-img>
     </el-form-item>
   </el-form>
 </div>
 </template>
 
 <script>
+import uploadImg from '@/components/upload/uploadImg'
 import {
   upload
 } from "@/api/common";
 export default {
+  components: {
+    uploadImg
+  },
   data() {
     return {
       editForm: {
@@ -71,9 +85,11 @@ export default {
         amount: "",
         category: "",
         status: "",
+        isNew: 2
       },
       fileList: [],
       categoryList: [],
+      statusList: [],
       rules: {
         productName: [{
           required: false,
@@ -99,6 +115,7 @@ export default {
     };
   },
   mounted() {
+    this.statusList = this.$parent.statusList;
     this.getCategoryType();
   },
   methods: {
@@ -124,6 +141,11 @@ export default {
     handleRemove() {},
     beforeAvatarUpload() {
 
+    },
+
+    // 图片上传成功
+    successImg(url) {
+      console.log('url', url);
     },
 
     imgUpload(fileData) {

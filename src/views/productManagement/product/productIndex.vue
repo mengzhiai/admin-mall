@@ -2,7 +2,7 @@
  * @Date: 2021-02-10 22:53:38
  * @Description: 产品管理
  * @LastEditors: jun
- * @LastEditTime: 2021-03-13 12:51:55
+ * @LastEditTime: 2021-03-20 23:14:29
  * @FilePath: \admin-mall\src\views\productManagement\product\productIndex.vue
 -->
 <template>
@@ -62,7 +62,24 @@ export default {
 
       },
       categoryList: [],
-      editDialog: false
+      editDialog: false,
+      statusList: [{
+          id: 1,
+          name: '在售'
+        },
+        {
+          id: 2,
+          name: '下架'
+        },
+        {
+          id: 3,
+          name: '无货'
+        },
+        {
+          id: 4,
+          name: '预约'
+        }
+      ],
     };
   },
   mounted() {

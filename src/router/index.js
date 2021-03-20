@@ -2,7 +2,7 @@
  * @Date: 2021-02-10 22:49:04
  * @Description: 路由
  * @LastEditors: jun
- * @LastEditTime: 2021-03-13 13:14:12
+ * @LastEditTime: 2021-03-20 14:10:03
  * @FilePath: \admin-mall\src\router\index.js
  */
 import Vue from 'vue'
@@ -32,10 +32,10 @@ const routes = [
           auth: true,
           crumbsList: [
             {
-              title: '商品管理'
+              title: '产品管理'
             },
             {
-              title: '产品管理'
+              title: '商品管理'
             }
           ]
         }
@@ -48,7 +48,7 @@ const routes = [
           auth: true,
           crumbsList: [
             {
-              title: '商品管理'
+              title: '产品管理'
             },
             {
               title: '分类管理'
@@ -64,7 +64,7 @@ const routes = [
           auth: true,
           crumbsList: [
             {
-              title: '商品管理'
+              title: '产品管理'
             },
             {
               title: '分类管理'

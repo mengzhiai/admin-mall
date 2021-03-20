@@ -2,7 +2,7 @@
  * @Date: 2021-02-12 23:55:32
  * @Description: 主页
  * @LastEditors: jun
- * @LastEditTime: 2021-03-13 13:09:38
+ * @LastEditTime: 2021-03-20 14:09:03
  * @FilePath: \admin-mall\src\views\home\index.vue
 -->
 <template>
@@ -39,10 +39,10 @@ export default {
     return {
       menuList: [{
           menuIndex: "1",
-          name: "商品管理",
+          name: "产品管理",
           children: [{
               childrenIndex: "1-1",
-              childName: "产品管理",
+              childName: "商品管理",
               nameVal: "product",
             },
             {
