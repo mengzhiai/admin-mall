@@ -2,7 +2,7 @@
  * @Date: 2021-02-14 12:39:02
  * @Description: 新增/编辑
  * @LastEditors: jun
- * @LastEditTime: 2021-03-21 01:00:42
+ * @LastEditTime: 2021-03-24 00:04:37
  * @FilePath: \admin-mall\src\views\productManagement\product\edit.vue
 -->
 <template>
@@ -160,6 +160,7 @@ export default {
     // 图片上传成功
     successImg(url) {
       console.log('url', url);
+      this.editForm.img = url;
     },
 
     imgUpload(fileData) {

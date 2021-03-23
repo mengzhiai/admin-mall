@@ -2,7 +2,7 @@
  * @Date: 2021-03-20 14:16:22
  * @Description: 图片上传
  * @LastEditors: jun
- * @LastEditTime: 2021-03-21 01:16:43
+ * @LastEditTime: 2021-03-24 00:03:17
  * @FilePath: \admin-mall\src\components\upload\uploadImg.vue
 -->
 <template>
@@ -11,6 +11,7 @@
       :action="$uploadUrl"
       list-type="picture-card"
       :limit="limitLen"
+      :data="imgData"
       :class="{ 'no-upload': uploadImgList.length == limitLen }"
       :on-success="onSuccess"
       :before-upload="beforeUpload"
@@ -44,6 +45,10 @@ export default {
       uploadImgList: [],
       dialogImageUrl: "",
       dialogVisible: false,
+      imgData: {
+        token: 'OZH9d7hJYRm9_q1B8FB8l4I25KMIOkEGHNfNeUVZ:SuDXNrjiPsdHE-aQZEUjsBjxISc=:eyJzY29wZSI6ImF6bSIsImRlYWRsaW5lIjoxNjE2NTE4NTM0fQ==',
+        bucket: 'azm',
+      }
     };
   },
   methods: {
@@ -79,7 +84,7 @@ export default {
     onSuccess(response, file, fileList) {
       console.log(response, file, fileList);
       this.uploadImgList = fileList;
-      this.$emit("successImg", response.url);
+      this.$emit("successImg", response.hash);
     },
   },
 };
