@@ -2,7 +2,7 @@
  * @Date: 2021-02-10 22:56:09
  * @Description: 
  * @LastEditors: jun
- * @LastEditTime: 2021-02-13 21:22:35
+ * @LastEditTime: 2021-05-27 22:51:30
  * @FilePath: \admin-mall\vue.config.js
  */
 const path = require('path');//引入path模块

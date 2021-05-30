@@ -2,7 +2,7 @@
  * @Date: 2021-03-13 13:03:23
  * @Description: 管理商品
  * @LastEditors: jun
- * @LastEditTime: 2021-03-13 14:09:18
+ * @LastEditTime: 2021-05-27 23:34:30
  * @FilePath: \admin-mall\src\views\productManagement\category\detail\goodsList.vue
 -->
 <template>
@@ -28,7 +28,24 @@ export default {
     return {
       categoryList: [],
       tablePage: {},
-      classifId: ''
+      classifId: '',
+      statusList: [{
+          id: 1,
+          name: '在售'
+        },
+        {
+          id: 2,
+          name: '下架'
+        },
+        {
+          id: 3,
+          name: '无货'
+        },
+        {
+          id: 4,
+          name: '预约'
+        }
+      ],
     }
   },
   mounted() {

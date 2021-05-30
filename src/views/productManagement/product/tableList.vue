@@ -2,7 +2,7 @@
  * @Date: 2021-02-14 12:26:53
  * @Description: table
  * @LastEditors: jun
- * @LastEditTime: 2021-03-21 01:05:38
+ * @LastEditTime: 2021-05-27 23:33:05
  * @FilePath: \admin-mall\src\views\productManagement\product\tableList.vue
 -->
 <template>
@@ -15,7 +15,7 @@
     <el-table-column prop="img" label="缩略图" min-width="100">
       <template slot-scope="scope">
         <viewer>
-          <img :src="scope.row.img" />
+          <img class="img-icon" :src="scope.row.img" />
         </viewer>
       </template>
     </el-table-column>
@@ -57,7 +57,9 @@ export default {
 
     // 获取分类列表
     getType(val) {
+      console.log('val', val);
       let list = this.$parent.categoryList;
+      console.log('list', list);
       let strVal = list.find((item) => val === item.id);
       return strVal.name;
     },
@@ -72,4 +74,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.img-icon {
+  width: 100px;
+  height: 100px;
+  
+}
 </style>
