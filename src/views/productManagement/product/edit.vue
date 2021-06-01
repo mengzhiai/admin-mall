@@ -2,7 +2,7 @@
  * @Date: 2021-02-14 12:39:02
  * @Description: 新增/编辑
  * @LastEditors: jun
- * @LastEditTime: 2021-03-24 00:04:37
+ * @LastEditTime: 2021-06-02 00:33:12
  * @FilePath: \admin-mall\src\views\productManagement\product\edit.vue
 -->
 <template>
@@ -50,31 +50,31 @@
             <el-radio :label="1">是</el-radio>
             <el-radio :label="2">否</el-radio>
           </el-radio-group>
-
         </el-form-item>
       </el-col>
     </el-row>
     <el-form-item label="商品图片:">
-      <upload-img @successImg="successImg" :limitLen="1"></upload-img>
+      <uploadPic ref="goodsPic" @successImg="successImg" :limitLen="1"></uploadPic>
     </el-form-item>
     <el-form-item label="商品展示图:">
-      <upload-img :limitLen="4"></upload-img>
+      <uploadExhibition :limitLen="4"></uploadExhibition>
     </el-form-item>
     <el-form-item label="商品详情图:">
-      <upload-img :limitLen="8"></upload-img>
+      <uploadDetail :limitLen="8"></uploadDetail>
     </el-form-item>
   </el-form>
 </div>
 </template>
 
 <script>
-import uploadImg from '@/components/upload/uploadImg'
-import {
-  upload
-} from "@/api/common";
+import uploadPic from '@/components/upload/uploadImg';
+import uploadExhibition from '@/components/upload/uploadImg';
+import uploadDetail from '@/components/upload/uploadImg';
 export default {
   components: {
-    uploadImg
+    uploadPic,
+    uploadExhibition,
+    uploadDetail
   },
   data() {
     return {
@@ -134,10 +134,9 @@ export default {
   },
   methods: {
     getCategoryType() {
-      console.log('this.$parent.categoryList', this.$parent.categoryList);
       this.categoryList = this.$parent.categoryList;
-      console.log('categoryList', this.categoryList);
     },
+
     validateFrom() {
       let flag = false;
       this.$refs.editForm.validate((valid) => {
@@ -150,34 +149,15 @@ export default {
       return flag;
     },
 
-    handlePictureCardPreview() {},
 
-    handleRemove() {},
-    beforeAvatarUpload() {
-
-    },
-
-    // 图片上传成功
     successImg(url) {
-      console.log('url', url);
       this.editForm.img = url;
     },
 
-    imgUpload(fileData) {
-      const file = fileData.file;
-      let formData = new FormData();
-      upload(formData).then((res) => {
-        if (res.code === 200) {
-          this.$message.success(res.msg);
-        }
-      });
-    },
-
-    onSuccess(response, file, fileList) {
-      console.log(response, file);
-      console.log("fileList", fileList);
-      this.fileList = fileList;
+    getPic() {
+      this.editForm.goodsPicList = this.$refs.goodsPic.getPicList();
     }
+
   },
 };
 </script>

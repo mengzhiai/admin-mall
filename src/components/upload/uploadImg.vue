@@ -2,7 +2,7 @@
  * @Date: 2021-03-20 14:16:22
  * @Description: 图片上传
  * @LastEditors: jun
- * @LastEditTime: 2021-03-24 00:03:17
+ * @LastEditTime: 2021-06-02 00:37:37
  * @FilePath: \admin-mall\src\components\upload\uploadImg.vue
 -->
 <template>
@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import { uploadToken } from "@/api/common";
 export default {
   props: {
     // 图片上传个数限制
@@ -46,33 +47,42 @@ export default {
       dialogImageUrl: "",
       dialogVisible: false,
       imgData: {
-        token: 'OZH9d7hJYRm9_q1B8FB8l4I25KMIOkEGHNfNeUVZ:SuDXNrjiPsdHE-aQZEUjsBjxISc=:eyJzY29wZSI6ImF6bSIsImRlYWRsaW5lIjoxNjE2NTE4NTM0fQ==',
-        bucket: 'azm',
-      }
+        token: "",
+        bucket: "azm",
+        key: "mall" + new Date().getTime(),
+      },
     };
   },
+
+  created() {
+    this.getToken();
+  },
   methods: {
+    getToken() {
+      uploadToken().then((res) => {
+        if (res.code === 200) {
+          this.imgData.token = res.data;
+        }
+      });
+    },
+
     handleRemove(file, fileList) {
-      console.log(file, fileList);
     },
 
     // 上传之前
     beforeUpload(file) {
-      console.log('file', file);
       const isJPG = file.type === "image/jpeg";
-      const isPng = file.type === 'image/png';
+      const isPng = file.type === "image/png";
       const isLt2M = file.size / 1024 / 1024 < 2;
 
-      if(isJPG || isJPG) {
-        this.$message.error('请上传图片');
-        return
+      if (isJPG || isPng) {
+        this.$message.error("请上传图片");
       }
 
       if (!isLt2M) {
         this.$message.error("上传头像图片大小不能超过 2MB!");
       }
       return isJPG && isLt2M;
-
     },
 
     // 查看图片
@@ -82,9 +92,29 @@ export default {
     },
 
     onSuccess(response, file, fileList) {
-      console.log(response, file, fileList);
       this.uploadImgList = fileList;
-      this.$emit("successImg", response.hash);
+      if (this.limitLen > 1) {
+        this.disposeData(fileList);
+      } else {
+        let url = `http://img.jun666.cn/${response.key}`;
+        this.$emit("successImg", url);
+      }
+    },
+
+    disposeData(dataList) {
+      let imgList = [];
+      dataList.forEach((item, i) => {
+        let obj = {
+          index: i,
+          url: `http://img.jun666.cn/${item.response.key}`,
+        };
+        imgList.push(obj);
+      });
+      this.uploadImgList = imgList;
+    },
+
+    getPicList() {
+      return this.uploadImgList;
     },
   },
 };

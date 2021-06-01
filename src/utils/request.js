@@ -2,7 +2,7 @@
  * @Date: 2021-02-10 23:04:50
  * @Description: 
  * @LastEditors: jun
- * @LastEditTime: 2021-03-20 23:21:06
+ * @LastEditTime: 2021-06-02 00:36:47
  * @FilePath: \admin-mall\src\utils\request.js
  */
 
@@ -186,16 +186,15 @@ service.interceptors.response.use(
   (response) => {
     const res = response.data
     //届时根据后端返回success或者code值判断
-    console.log('res', res);
-    if(res.code == 200) {
+    if(res.code == 200 || res.key) {
       return res;
     } else if(res.code == 401){
-      Message.error(res.msg);
+      Message.error(res.msg || '');
       router.replace({
         path:'/'
       })
     } else {
-      Message.error(res.msg);
+      Message.error(res.msg || '');
       return res;
     }
   },

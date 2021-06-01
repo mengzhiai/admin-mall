@@ -2,7 +2,7 @@
  * @Date: 2021-02-10 22:53:38
  * @Description: 产品管理
  * @LastEditors: jun
- * @LastEditTime: 2021-03-20 23:39:06
+ * @LastEditTime: 2021-06-01 23:56:41
  * @FilePath: \admin-mall\src\views\productManagement\product\productIndex.vue
 -->
 <template>
@@ -191,15 +191,10 @@ export default {
     saveData() {
       let val = this.$refs.edit.validateFrom();
       let params = this.$refs.edit.editForm;
-      let picList = this.$refs.edit.fileList;
 
       if (!val) {
         this.$message.warning('请将必填项填写完整');
         return
-      }
-
-      if (picList.length) {
-        params.img = picList[0].response.url;
       }
 
       if (!params.id) {

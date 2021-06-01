@@ -2,7 +2,7 @@
  * @Date: 2021-03-13 11:45:04
  * @Description: 新增/编辑分类
  * @LastEditors: jun
- * @LastEditTime: 2021-03-20 23:42:05
+ * @LastEditTime: 2021-06-01 23:32:52
  * @FilePath: \admin-mall\src\views\productManagement\category\edit.vue
 -->
 <template>
@@ -15,7 +15,6 @@
       <el-input v-model="editForm.icon"></el-input>
     </el-form-item>
   </el-form>
-
 </div>
 </template>
 
