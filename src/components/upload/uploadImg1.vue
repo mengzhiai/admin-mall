@@ -2,7 +2,7 @@
  * @Date: 2021-06-09 23:52:23
  * @Description: 
  * @LastEditors: jun
- * @LastEditTime: 2021-06-10 01:27:00
+ * @LastEditTime: 2021-06-10 01:38:26
  * @FilePath: \admin-mall\src\components\upload\uploadImg1.vue
 -->
 <template>
@@ -82,6 +82,6 @@ export default {
   width: 100px;
   height: 100px;
   line-height: 100px;
-  border: 1px solid #ccc;
+  border: 1px dashed #ccc;
 }
 </style>
