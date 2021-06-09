@@ -2,7 +2,7 @@
  * @Date: 2021-02-14 12:26:53
  * @Description: table
  * @LastEditors: jun
- * @LastEditTime: 2021-05-27 23:33:05
+ * @LastEditTime: 2021-06-03 22:54:22
  * @FilePath: \admin-mall\src\views\productManagement\product\tableList.vue
 -->
 <template>
@@ -12,10 +12,10 @@
     </el-table-column>
     <el-table-column prop="test" label="商品编号" min-width="100">
     </el-table-column>
-    <el-table-column prop="img" label="缩略图" min-width="100">
+    <el-table-column label="缩略图" min-width="100">
       <template slot-scope="scope">
         <viewer>
-          <img class="img-icon" :src="scope.row.img" />
+          <img class="img-icon" :src="scope.row.exhibitionImg" />
         </viewer>
       </template>
     </el-table-column>

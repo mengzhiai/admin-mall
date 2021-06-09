@@ -2,7 +2,7 @@
  * @Date: 2021-03-20 14:16:22
  * @Description: 图片上传
  * @LastEditors: jun
- * @LastEditTime: 2021-06-02 00:37:37
+ * @LastEditTime: 2021-06-10 00:34:50
  * @FilePath: \admin-mall\src\components\upload\uploadImg.vue
 -->
 <template>

@@ -2,7 +2,7 @@
  * @Date: 2021-02-14 12:39:02
  * @Description: 新增/编辑
  * @LastEditors: jun
- * @LastEditTime: 2021-06-02 00:33:12
+ * @LastEditTime: 2021-06-10 01:26:35
  * @FilePath: \admin-mall\src\views\productManagement\product\edit.vue
 -->
 <template>
@@ -54,7 +54,7 @@
       </el-col>
     </el-row>
     <el-form-item label="商品图片:">
-      <uploadPic ref="goodsPic" @successImg="successImg" :limitLen="1"></uploadPic>
+      <uploadPic ref="goodsPic" :imgUrl="editForm.exhibitionImg" @successImg="successImg" :limit="1"></uploadPic>
     </el-form-item>
     <el-form-item label="商品展示图:">
       <uploadExhibition :limitLen="4"></uploadExhibition>
@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import uploadPic from '@/components/upload/uploadImg';
+import uploadPic from '@/components/upload/uploadImg1';
 import uploadExhibition from '@/components/upload/uploadImg';
 import uploadDetail from '@/components/upload/uploadImg';
 export default {
@@ -130,6 +130,7 @@ export default {
     };
   },
   mounted() {
+    console.log('this', this.editForm);
     this.getCategoryType();
   },
   methods: {
@@ -151,7 +152,8 @@ export default {
 
 
     successImg(url) {
-      this.editForm.img = url;
+      this.editForm.exhibitionImg = url;
+      this.$forceUpdate();
     },
 
     getPic() {
