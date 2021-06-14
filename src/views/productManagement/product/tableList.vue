@@ -2,7 +2,7 @@
  * @Date: 2021-02-14 12:26:53
  * @Description: table
  * @LastEditors: jun
- * @LastEditTime: 2021-06-03 22:54:22
+ * @LastEditTime: 2021-06-14 19:45:10
  * @FilePath: \admin-mall\src\views\productManagement\product\tableList.vue
 -->
 <template>
@@ -15,7 +15,7 @@
     <el-table-column label="缩略图" min-width="100">
       <template slot-scope="scope">
         <viewer>
-          <img class="img-icon" :src="scope.row.exhibitionImg" />
+          <img class="img-icon" :src="scope.row.img" />
         </viewer>
       </template>
     </el-table-column>
@@ -77,6 +77,6 @@ export default {
 .img-icon {
   width: 100px;
   height: 100px;
-  
+  cursor: pointer;
 }
 </style>

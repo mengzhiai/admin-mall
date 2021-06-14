@@ -2,7 +2,7 @@
  * @Date: 2021-02-10 22:53:38
  * @Description: 产品管理
  * @LastEditors: jun
- * @LastEditTime: 2021-06-09 23:02:05
+ * @LastEditTime: 2021-06-14 19:43:27
  * @FilePath: \admin-mall\src\views\productManagement\product\productIndex.vue
 -->
 <template>
