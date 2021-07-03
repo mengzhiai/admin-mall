@@ -2,7 +2,7 @@
  * @Date: 2021-02-10 22:53:38
  * @Description: 产品管理
  * @LastEditors: jun
- * @LastEditTime: 2021-07-03 18:29:31
+ * @LastEditTime: 2021-07-04 00:08:16
  * @FilePath: \admin-mall\src\views\productManagement\product\productIndex.vue
 -->
 <template>
@@ -21,14 +21,13 @@
   </el-form>
   <tableList ref="tableList" @editRow="editRow"></tableList>
   <paging :pageSize="tablePage.pageSize" :totalNum="tablePage.total" :currentPage="tablePage.currentPage" @currentChange="currentChange"></paging>
-  <el-dialog title="添加/编辑" :visible.sync="editDialog" width="800px" :close-on-click-modal="false">
+  <el-dialog title="添加/编辑" :visible.sync="editDialog" width="1000px" :close-on-click-modal="false">
     <edit ref="edit" v-if="editDialog"></edit>
     <div class="flex-center">
       <el-button type="default" size="medium" @click="editDialog=false">取消</el-button>
       <el-button type="primary" size="medium" @click="saveData">保存</el-button>
     </div>
   </el-dialog>
-
 </div>
 </template>
 
@@ -43,7 +42,7 @@ import {
   productUpdate,
   productDelete,
   classifyList
-} from '@/api/product'
+} from '@/api/product';
 export default {
   components: {
     tableList,
@@ -80,6 +79,11 @@ export default {
           name: '预约'
         }
       ],
+      imgData: {
+        token: "",
+        bucket: "azm",
+        key: "mall" + new Date().getTime(),
+      },
     };
   },
   mounted() {
@@ -192,8 +196,7 @@ export default {
       let val = this.$refs.edit.validateFrom();
       let params = this.$refs.edit.editForm;
       let list = this.$refs.edit.getPicList();
-      console.log('aa', this.$refs.edit);
-      console.log('list', list);
+      console.log('params', params);
       if (!val) {
         this.$message.warning('请将必填项填写完整');
         return
@@ -218,7 +221,6 @@ export default {
           }
         })
       }
-
     },
 
   }

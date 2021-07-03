@@ -2,7 +2,7 @@
  * @Date: 2021-02-14 12:26:53
  * @Description: table
  * @LastEditors: jun
- * @LastEditTime: 2021-06-14 19:45:10
+ * @LastEditTime: 2021-07-04 00:10:21
  * @FilePath: \admin-mall\src\views\productManagement\product\tableList.vue
 -->
 <template>
@@ -57,9 +57,7 @@ export default {
 
     // 获取分类列表
     getType(val) {
-      console.log('val', val);
       let list = this.$parent.categoryList;
-      console.log('list', list);
       let strVal = list.find((item) => val === item.id);
       return strVal.name;
     },

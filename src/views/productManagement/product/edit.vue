@@ -2,7 +2,7 @@
  * @Date: 2021-02-14 12:39:02
  * @Description: 新增/编辑
  * @LastEditors: jun
- * @LastEditTime: 2021-07-03 17:55:35
+ * @LastEditTime: 2021-07-03 22:58:32
  * @FilePath: \admin-mall\src\views\productManagement\product\edit.vue
 -->
 <template>
@@ -63,21 +63,23 @@
     <el-form-item label="商品展示图片:">
       <uploadExhibition ref="uploadExhibition" :limitLen="4"></uploadExhibition>
     </el-form-item>
-    <el-form-item label="商品详情图:">
-      <div ref="editor" style="text-align:left" class="textBox">
+    <el-form-item label="商品详情:">
+      <editor :option="option" v-model="editForm.detailContent"></editor>
     </el-form-item>
   </el-form>
 </div>
 </template>
 
 <script>
-// import Editor from 'wangeditor'
 import uploadPic from '@/components/upload/uploadImg1';
 import uploadExhibition from '@/components/upload/uploadImg';
+import editor from '@/components/editor/editor.vue';
+
 export default {
   components: {
     uploadPic,
-    uploadExhibition
+    uploadExhibition,
+    editor
   },
   data() {
     return {
@@ -88,7 +90,8 @@ export default {
         category: "",
         status: "",
         isNew: 2,
-        img: ''
+        img: '',
+        detailContent: ''
       },
       fileList: [],
       categoryList: [],
@@ -140,10 +143,10 @@ export default {
           message: "请上传商品图",
           trigger: "change",
         }],
-
-        editorContent: '',
-        editor: null
       },
+      option: {
+        height: 400,
+      }
     };
   },
   mounted() {
@@ -151,19 +154,6 @@ export default {
     this.getCategoryType();
   },
   methods: {
-    getEditor() {
-      this.editor = new Editor(this.$refs.editor)
-      this.editor.customConfig.onchange = (html, a) => {
-        // console.log(html,'----------------',a)
-        this.editorContent = html
-      }
-      // this.editor.customConfig.uploadImgShowBase64 = true // 使用base64保存图片  上下两者不可同用
-      this.editor.customConfig.uploadImgServer = 'http://chuantu.xyz/' // 上传图片到服务器
-      // 隐藏“网络图片”tab
-      this.editor.customConfig.showLinkImg = false
-      this.editor.create()
-    },
-
     // 获取商品分类
     getCategoryType() {
       this.categoryList = this.$parent.categoryList;

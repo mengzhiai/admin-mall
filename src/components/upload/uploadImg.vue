@@ -2,7 +2,7 @@
  * @Date: 2021-03-20 14:16:22
  * @Description: 图片上传
  * @LastEditors: jun
- * @LastEditTime: 2021-07-03 17:37:04
+ * @LastEditTime: 2021-07-04 00:09:04
  * @FilePath: \admin-mall\src\components\upload\uploadImg.vue
 -->
 <template>
@@ -93,6 +93,7 @@ export default {
 
     onSuccess(response, file, fileList) {
       this.uploadImgList = fileList;
+      this.imgData.key = 'mall' + new Date().getTime();
       if (this.limitLen >= 1) {
         this.disposeData(fileList);
       } else {

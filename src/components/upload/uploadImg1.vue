@@ -2,7 +2,7 @@
  * @Date: 2021-06-09 23:52:23
  * @Description: 
  * @LastEditors: jun
- * @LastEditTime: 2021-06-10 01:38:26
+ * @LastEditTime: 2021-07-03 23:58:55
  * @FilePath: \admin-mall\src\components\upload\uploadImg1.vue
 -->
 <template>
