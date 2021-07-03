@@ -6,7 +6,7 @@
  * @FilePath: \admin-mall\src\views\productManagement\category\tableList.vue
 -->
 <template>
-<div class="xm-table">
+<div class="table-list">
   <el-table :data="tableData" border stripe height="calc(100vh - 280px)">
     <el-table-column prop="name" label="分类名称" min-width="100"></el-table-column>
     <el-table-column prop="productName" label="分类数量" min-width="100">

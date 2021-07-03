@@ -2,7 +2,7 @@
  * @Date: 2021-02-10 22:49:04
  * @Description: 路由
  * @LastEditors: jun
- * @LastEditTime: 2021-03-20 14:10:03
+ * @LastEditTime: 2021-07-04 00:49:25
  * @FilePath: \admin-mall\src\router\index.js
  */
 import Vue from 'vue'
@@ -71,6 +71,22 @@ const routes = [
             },
             {
               title: '商品管理'
+            }
+          ]
+        }
+      },
+      {
+        path: '/carouselManage',
+        name: 'bannerIndex',
+        component: () => import('../views/carouselManage/bannerCarousel/bannerIndex'),
+        meta: {
+          auth: true,
+          crumbsList: [
+            {
+              title: '轮播图管理'
+            },
+            {
+              title: '首页轮播图'
             }
           ]
         }

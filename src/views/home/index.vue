@@ -2,7 +2,7 @@
  * @Date: 2021-02-12 23:55:32
  * @Description: 主页
  * @LastEditors: jun
- * @LastEditTime: 2021-03-20 14:09:03
+ * @LastEditTime: 2021-07-04 00:52:31
  * @FilePath: \admin-mall\src\views\home\index.vue
 -->
 <template>
@@ -12,7 +12,7 @@
   </div>
   <div class="container flex">
     <div class="menu">
-      <el-menu class="menu-list" @open="handleOpen" @close="handleClose" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
+      <el-menu class="menu-list" @open="handleOpen" @close="handleClose" :unique-opened="true" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
         <el-submenu :index="item.menuIndex" v-for="(item, index) in menuList" :key="index">
           <template slot="title">{{ item.name }}</template>
           <el-menu-item class="item" :index="ele.childrenIndex" v-for="(ele, i) in item.children" :key="i" @click="clickMenu(ele)">{{ ele.childName }}</el-menu-item>
@@ -27,7 +27,9 @@
           <!-- <el-breadcrumb-item v-for="(item,i) in $route.meta" :key="i" :to="{path: item.url}">{{item.title}}</el-breadcrumb-item> -->
         </el-breadcrumb>
       </div>
-      <div class="router-view"><router-view></router-view></div>
+      <div class="router-view">
+        <router-view></router-view>
+      </div>
     </div>
   </div>
 </div>
@@ -50,6 +52,16 @@ export default {
               childName: "分类管理",
               nameVal: "category",
             },
+          ],
+        },
+        {
+          menuIndex: "4",
+          name: "轮播图管理",
+          children: [{
+              childrenIndex: "4-1",
+              childName: "首页轮播图",
+              nameVal: "bannerIndex",
+            }
           ],
         },
         {
@@ -106,11 +118,11 @@ export default {
   margin-bottom: 1px;
 }
 
-
 .container {
   .menu {
     width: 300px;
   }
+
   .main {
     width: calc(100% - 300px - 5px);
     height: calc(100vh - 61px);
@@ -118,10 +130,12 @@ export default {
     background-color: #F5F7F9;
   }
 }
+
 .crumbs {
   // height: 30px;
   padding: 0 10px;
   box-shadow: 0 1px 4px #ccc;
+
   .el-breadcrumb {
     line-height: 40px;
   }
@@ -130,7 +144,6 @@ export default {
 .router-view {
   margin: 10px 0;
 }
-
 
 .menu-list {
   .item {

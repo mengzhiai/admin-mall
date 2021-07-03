@@ -50,14 +50,14 @@ td {
   margin-bottom: 0;
 }
 
-.xm-table {
+.table-list {
   margin-top: 10px;
   background-color: #fff;
   padding: 15px;
 }
 
-.xm-table .el-table th,
-.xm-table .el-table td {
+.table-list .el-table th,
+.table-list .el-table td {
   text-align: center;
 }
 
