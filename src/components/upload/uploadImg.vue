@@ -2,7 +2,7 @@
  * @Date: 2021-03-20 14:16:22
  * @Description: 图片上传
  * @LastEditors: jun
- * @LastEditTime: 2021-06-10 00:34:50
+ * @LastEditTime: 2021-07-03 17:37:04
  * @FilePath: \admin-mall\src\components\upload\uploadImg.vue
 -->
 <template>
@@ -93,7 +93,7 @@ export default {
 
     onSuccess(response, file, fileList) {
       this.uploadImgList = fileList;
-      if (this.limitLen > 1) {
+      if (this.limitLen >= 1) {
         this.disposeData(fileList);
       } else {
         let url = `http://img.jun666.cn/${response.key}`;
@@ -114,7 +114,9 @@ export default {
     },
 
     getPicList() {
-      return this.uploadImgList;
+      console.log('aa', this.uploadImgList);
+      let list = this.uploadImgList;
+      return list;
     },
   },
 };
