@@ -53,12 +53,17 @@ td {
 .table-list {
   margin-top: 10px;
   background-color: #fff;
-  padding: 15px;
 }
 
 .table-list .el-table th,
 .table-list .el-table td {
   text-align: center;
+}
+
+.table-list .el-table .img-icon {
+  width: 70px;
+  height: 70px;
+  cursor: pointer;
 }
 
 .xm-page {

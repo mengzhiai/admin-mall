@@ -2,7 +2,7 @@
  * @Date: 2021-02-14 12:39:02
  * @Description: 新增/编辑
  * @LastEditors: jun
- * @LastEditTime: 2021-07-03 22:58:32
+ * @LastEditTime: 2021-07-06 23:44:27
  * @FilePath: \admin-mall\src\views\productManagement\product\edit.vue
 -->
 <template>
@@ -55,7 +55,6 @@
     </el-row>
     <el-form-item label="商品标签:">
       <el-input v-model="editForm.label" placeholder="请输入商品标签" clearable></el-input>
-
     </el-form-item>
     <el-form-item label="商品图片:" prop="img">
       <uploadPic ref="goodsPic" :imgUrl="editForm.img" @successImg="successImg" :limit="1"></uploadPic>

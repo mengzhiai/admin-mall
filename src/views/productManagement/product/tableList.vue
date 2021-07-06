@@ -2,7 +2,7 @@
  * @Date: 2021-02-14 12:26:53
  * @Description: table
  * @LastEditors: jun
- * @LastEditTime: 2021-07-04 00:10:21
+ * @LastEditTime: 2021-07-06 23:02:35
  * @FilePath: \admin-mall\src\views\productManagement\product\tableList.vue
 -->
 <template>
@@ -72,9 +72,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.img-icon {
-  width: 100px;
-  height: 100px;
-  cursor: pointer;
-}
 </style>

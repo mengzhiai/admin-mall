@@ -32,6 +32,7 @@ td {
 
 .xm-container {
   margin: 0 10px;
+
   .search {
     padding: 15px;
     background-color: #fff;
@@ -54,13 +55,19 @@ td {
   // border: 1px solid #dcdee2;
   // border-color: #e8eaec;
   background-color: #fff;
-  padding: 15px;
+  // padding: 15px;
 
   .el-table {
 
     th,
     td {
       text-align: center;
+    }
+
+    .img-icon {
+      width: 70px;
+      height: 70px;
+      cursor: pointer;
     }
   }
 }
@@ -101,6 +108,7 @@ td {
     height: 100px;
     line-height: 100px;
   }
+
   .el-upload-list--picture-card .el-upload-list__item {
     width: 100px;
     height: 100px;
