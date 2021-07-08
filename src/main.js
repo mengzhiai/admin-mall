@@ -2,7 +2,7 @@
  * @Date: 2021-02-10 22:49:04
  * @Description: 
  * @LastEditors: jun
- * @LastEditTime: 2021-03-13 11:36:18
+ * @LastEditTime: 2021-07-09 00:23:18
  * @FilePath: \admin-mall\src\main.js
  */
 import Vue from 'vue'
@@ -31,7 +31,11 @@ Vue.prototype.$uploadUrl = baseUrl.uploadUrl;
 // 公用混入
 // 防止重复提交混入
 import mixin from './utils/mixin.js'
-Vue.use(mixin)
+Vue.use(mixin);
+
+import { handleConfirm, handleMessage } from './utils/element';
+Vue.prototype.$handleConfirm = handleConfirm;
+Vue.prototype.$handleMessage = handleMessage;
 
 Vue.use(ElementUI)
 

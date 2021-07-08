@@ -2,11 +2,12 @@
  * @Date: 2021-02-10 23:07:42
  * @Description: http
  * @LastEditors: jun
- * @LastEditTime: 2021-07-07 00:14:24
+ * @LastEditTime: 2021-07-09 00:06:32
  * @FilePath: \admin-mall\src\utils\http.js
  */
 
-import { service } from './request'
+import { service } from './request';
+import { Message } from 'element-ui'
 
 export function get(url, data) {
   return new Promise((resolve, reject) => {
@@ -19,6 +20,7 @@ export function get(url, data) {
       })
       .catch(err => {
         reject(err);
+        Message({ message: err.msg, type: 'error' });
       });
   });
 }
@@ -33,6 +35,7 @@ export function post(url, data = {}) {
       })
       .catch(err => {
         reject(err);
+        Message({ message: err.msg, type: 'error' });
       });
   });
 }
@@ -47,6 +50,21 @@ export function put(url, data = {}) {
       })
       .catch(err => {
         reject(err);
+        Message({ message: err.msg, type: 'error' });
       });
+  });
+}
+
+
+export function deletefn(url, params) {
+  return new Promise((resolve, reject) => {
+    service.delete(url, params)
+      .then(response => {
+        resolve(response);
+      })
+      .catch(err => {
+        reject(err);
+        Message({ message: err.msg, type: 'error' });
+      })
   });
 }

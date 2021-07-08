@@ -2,10 +2,10 @@
  * @Date: 2021-03-13 11:35:11
  * @Description: 公用混入
  * @LastEditors: jun
- * @LastEditTime: 2021-07-03 21:25:54
+ * @LastEditTime: 2021-07-09 00:37:26
  * @FilePath: \admin-mall\src\utils\mixin.js
  */
-
+import { MessageBox, Message } from 'element-ui';
 export default {
   install(Vue) {
     Vue.mixin({
@@ -18,19 +18,34 @@ export default {
           editDialog: false
         }
       },
-      /* mounted() {
-        this.disabledBtn = false;
-        this.formLoading = false;
-      }, */
       methods: {
-        /* disabledStart() {
-          this.disabledBtn = true;
-          this.formLoading = true;
+        loadingStatus(boolVal) {
+          if (boolVal) {
+            this.commonLoading = true;
+          } else {
+            this.commonLoading = false;
+          }
         },
-        disabledClose() {
-          this.disabledBtn = false;
-          this.formLoading = false;
-        } */
+
+
+        commonMsg(res) {
+          if (res.code === 200) {
+            Message({
+              message: res.msg,
+              type: 'success'
+            });
+          }
+        },
+
+        commonEditMsg(res, callback, dialog) {
+          if (res.code === 200) {
+            this.dialog = false;
+            Message({
+              message: res.msg,
+              type: 'success'
+            });
+          }
+        }
       }
     })
   }

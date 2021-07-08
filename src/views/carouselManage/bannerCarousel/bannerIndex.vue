@@ -2,7 +2,7 @@
  * @Date: 2021-07-04 00:20:53
  * @Description: 
  * @LastEditors: jun
- * @LastEditTime: 2021-07-07 01:12:43
+ * @LastEditTime: 2021-07-09 00:44:56
  * @FilePath: \admin-mall\src\views\carouselManage\bannerCarousel\bannerIndex.vue
 -->
 <template>
@@ -12,14 +12,14 @@
       <el-button type="primary" @click="addBanner">添加</el-button>
     </el-form-item>
     <el-form-item label="标题:">
-      <el-input v-model="searchForm.title" placeholder="请输入标题"></el-input>
+      <el-input v-model="searchForm.keyword" placeholder="请输入标题"></el-input>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary">搜索</el-button>
-      <el-button>重置</el-button>
+      <el-button type="primary" @click="getList">搜索</el-button>
+      <el-button @click="reset">重置</el-button>
     </el-form-item>
   </el-form>
-  <div class="table-list">
+  <div class="table-list" v-loading="commonLoading">
     <el-table :data="tableData" border stripe height="calc(100vh - 280px)">
       <el-table-column prop="id" label="id" min-width="100">
       </el-table-column>
@@ -42,14 +42,14 @@
       </el-table-column>
       <el-table-column prop="" label="结束时间" width="160">
       </el-table-column>
-      <el-table-column prop="" label="创建时间" width="160">
+      <el-table-column prop="createTime" label="创建时间" width="160">
       </el-table-column>
       <el-table-column prop="" label="跳转位置" min-width="160">
       </el-table-column>
       <el-table-column label="操作" width="180" fixed="right">
         <template slot-scope="scope">
-          <el-button type="primary" size="small" @click="editRow(scope.row, 'edit')">编辑</el-button>
-          <el-button type="danger" size="small" @click="editRow(scope.row, 'delete')">删除</el-button>
+          <el-button type="primary" size="small" @click="editRow(scope.row.id, 'edit')">编辑</el-button>
+          <el-button type="danger" size="small" @click="editRow(scope.row.id, 'delete')">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -69,7 +69,10 @@
 import edit from './edit.vue'
 import {
   bannerList,
-  addBanner
+  addBanner,
+  bannerDetail,
+  updateBanner,
+  deleteBanner
 } from '@/api/carousel'
 export default {
   components: {
@@ -78,7 +81,7 @@ export default {
   data() {
     return {
       searchForm: {
-
+        keyword: ''
       },
       tableData: [],
       editDialog: false
@@ -91,38 +94,79 @@ export default {
     getList() {
       let params = {
         page: 1,
-        limit: 10
+        limit: 10,
+        keyword: this.searchForm.keyword
       }
+      this.loadingStatus(true);
       bannerList(params).then(res => {
+        this.loadingStatus(false);
         if (res.code === 200) {
           this.tableData = res.data;
         }
       })
     },
 
+    reset() {
+      this.searchForm.keyword = '';
+      this.getList();
+    },
+
     addBanner() {
       this.editDialog = true;
     },
 
-    editRow(row) {
-      this.editDialog = true;
+    editRow(id, type) {
+      if (type === 'edit') {
+        this.editDialog = true;
+        this.getDetail(id);
+      } else if (type === 'delete') {
+        this.getDelete(id);
+      }
     },
 
+    getDetail(id) {
+      bannerDetail(id).then(res => {
+        if (res.code === 200) {
+          this.$refs.edit.editForm = res.data;
+        }
+      })
+    },
+
+    getDelete(id) {
+      deleteBanner(id).then(res => {
+        if (res.code === 200) {
+          this.getList();
+          this.$message.success(res.msg);
+        }
+      })
+    },
 
     saveData() {
       let flag = this.$refs.edit.validateFrom();
       let params = this.$refs.edit.editForm;
 
-      if(!flag) {
+      if (!flag) {
         this.$message.warning('请将必填项填写完整');
         return
       }
-      addBanner(params).then(res => {
-        if(res.code === 200) {
-          
-        }
-      })
+
+      if (!params.id) {
+        addBanner(params).then(res => {
+          if (res.code === 200) {
+            this.getList();
+            this.editDialog = false;
+            this.$message.success(res.msg);
+          }
+        })
+      } else {
+        updateBanner(params).then(res => {
+          this.getList();
+          this.editDialog = false;
+          this.$message.success(res.msg);
+        })
+      }
     }
+
   }
 }
 </script>
