@@ -2,7 +2,7 @@
  * @Date: 2021-07-04 00:20:53
  * @Description: 
  * @LastEditors: jun
- * @LastEditTime: 2021-07-09 00:44:56
+ * @LastEditTime: 2021-07-11 17:32:19
  * @FilePath: \admin-mall\src\views\carouselManage\bannerCarousel\bannerIndex.vue
 -->
 <template>
@@ -34,7 +34,7 @@
       </el-table-column>
       <el-table-column prop="" label="状态" min-width="100">
         <template slot-scope="scope">
-          <el-switch v-model="scope.row.status" active-color="#409eff" inactive-color="#cccccc" active-value="100" inactive-value="0">
+          <el-switch v-model="scope.row.status" active-color="#409eff" inactive-color="#cccccc" active-value="1" inactive-value="2" @change="changeStatus(scope.row)">
           </el-switch>
         </template>
       </el-table-column>
@@ -72,8 +72,12 @@ import {
   addBanner,
   bannerDetail,
   updateBanner,
-  deleteBanner
-} from '@/api/carousel'
+  deleteBanner,
+  bannerStatus
+} from '@/api/carousel';
+import {
+  allProductList
+} from '@/api/common'
 export default {
   components: {
     edit
@@ -113,11 +117,21 @@ export default {
 
     addBanner() {
       this.editDialog = true;
+      this.getProduct();
+    },
+
+    getProduct() {
+      allProductList().then(res => {
+        if (res.code === 200) {
+          this.$refs.edit.productList = res.data;
+        }
+      })
     },
 
     editRow(id, type) {
       if (type === 'edit') {
         this.editDialog = true;
+        this.getProduct();
         this.getDetail(id);
       } else if (type === 'delete') {
         this.getDelete(id);
@@ -133,12 +147,14 @@ export default {
     },
 
     getDelete(id) {
-      deleteBanner(id).then(res => {
-        if (res.code === 200) {
-          this.getList();
-          this.$message.success(res.msg);
-        }
-      })
+      this.$handleConfirm('确定要删除吗?').then(() => {
+        deleteBanner(id).then(res => {
+          if (res.code === 200) {
+            this.getList();
+            this.$message.success(res.msg);
+          }
+        })
+      }).catch(() => {})
     },
 
     saveData() {
@@ -165,7 +181,21 @@ export default {
           this.$message.success(res.msg);
         })
       }
-    }
+    },
+
+    // 修改状态
+    changeStatus(row) {
+      let params = {
+        id: row.id,
+        status: row.status
+      }
+      bannerStatus(params).then(res => {
+        if (res.code === 200) {
+          this.getList();
+          this.$handleMessage('修改成功');
+        }
+      })
+    },
 
   }
 }

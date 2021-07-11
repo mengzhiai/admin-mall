@@ -15,8 +15,8 @@
         </el-form-item>
       </el-col>
       <el-col :span="12">
-        <el-form-item label="商品价格:" prop="productPrice">
-          <el-input v-model="editForm.productPrice" placeholder="商品价格"></el-input>
+        <el-form-item label="商品价格:" prop="price">
+          <el-input v-model="editForm.price" placeholder="商品价格"></el-input>
         </el-form-item>
       </el-col>
     </el-row>
@@ -84,7 +84,7 @@ export default {
     return {
       editForm: {
         productName: "",
-        productPrice: "",
+        price: "",
         amount: "",
         category: "",
         status: "",
@@ -117,7 +117,7 @@ export default {
           message: "请输入商品名称",
           trigger: "blur",
         }],
-        productPrice: [{
+        price: [{
           required: true,
           message: "请输入商品价格",
           trigger: "blur",

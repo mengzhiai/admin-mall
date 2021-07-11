@@ -2,7 +2,7 @@
  * @Date: 2021-02-10 23:07:42
  * @Description: http
  * @LastEditors: jun
- * @LastEditTime: 2021-07-09 00:06:32
+ * @LastEditTime: 2021-07-10 15:32:56
  * @FilePath: \admin-mall\src\utils\http.js
  */
 
@@ -56,7 +56,7 @@ export function put(url, data = {}) {
 }
 
 
-export function deletefn(url, params) {
+export function deleteFn(url, params) {
   return new Promise((resolve, reject) => {
     service.delete(url, params)
       .then(response => {

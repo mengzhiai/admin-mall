@@ -19,7 +19,7 @@
         </viewer>
       </template>
     </el-table-column>
-    <el-table-column prop="productPrice" label="商品价格" min-width="100">
+    <el-table-column prop="price" label="商品价格" min-width="100">
     </el-table-column>
     <el-table-column label="产品分类" min-width="100">
       <template slot-scope="scope">

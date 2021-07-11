@@ -2,7 +2,7 @@
  * @Date: 2021-07-09 00:10:32
  * @Description: element-ui公用方法封装
  * @LastEditors: jun
- * @LastEditTime: 2021-07-09 00:25:05
+ * @LastEditTime: 2021-07-10 15:43:05
  * @FilePath: \admin-mall\src\utils\element.js
  */
 import Vue from 'vue'
