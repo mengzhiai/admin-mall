@@ -2,7 +2,7 @@
  * @Date: 2021-02-14 12:26:53
  * @Description: table
  * @LastEditors: jun
- * @LastEditTime: 2021-07-06 23:02:35
+ * @LastEditTime: 2021-07-19 23:38:14
  * @FilePath: \admin-mall\src\views\productManagement\product\tableList.vue
 -->
 <template>
@@ -45,6 +45,14 @@
 
 <script>
 export default {
+  props: {
+    statusList: {
+      type: Array,
+      default: (() => {
+        return []
+      })
+    }
+  },
   data() {
     return {
       tableData: [],
@@ -58,14 +66,18 @@ export default {
     // 获取分类列表
     getType(val) {
       let list = this.$parent.categoryList;
-      let strVal = list.find((item) => val === item.id);
-      return strVal.name;
+      if (list) {
+        let strVal = list.find((item) => val === item.id);
+        return strVal.name;
+      }
     },
 
     getStatus(val) {
-      let list = this.$parent.statusList;
-      let item =  list.find((item) => item.id === val);
-      return item.name
+      let list = this.statusList;
+      if (list) {
+        let item = list.find((item) => item.id === val);
+        return item.name
+      }
     }
   },
 };

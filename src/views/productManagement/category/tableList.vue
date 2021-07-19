@@ -2,13 +2,20 @@
  * @Date: 2021-02-14 12:26:53
  * @Description: table
  * @LastEditors: jun
- * @LastEditTime: 2021-03-13 23:06:10
+ * @LastEditTime: 2021-07-18 13:59:00
  * @FilePath: \admin-mall\src\views\productManagement\category\tableList.vue
 -->
 <template>
 <div class="table-list">
   <el-table :data="tableData" border stripe height="calc(100vh - 280px)">
     <el-table-column prop="name" label="分类名称" min-width="100"></el-table-column>
+    <el-table-column label="分类图标" min-width="100">
+      <template slot-scope="scope">
+        <viewer>
+          <img class="img-icon" :src="scope.row.img" />
+        </viewer>
+      </template>
+    </el-table-column>
     <el-table-column prop="productName" label="分类数量" min-width="100">
       <template slot-scope="scope">
         <span>{{scope.row.list.length}}</span>

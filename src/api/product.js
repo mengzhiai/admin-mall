@@ -2,12 +2,12 @@
  * @Date: 2021-02-13 14:36:34
  * @Description: 产品管理
  * @LastEditors: jun
- * @LastEditTime: 2021-03-13 14:02:06
+ * @LastEditTime: 2021-07-18 13:57:01
  * @FilePath: \admin-mall\src\api\product.js
  */
 import baseUrl from './baseUrl'
 // import { get, post } from '../utils/request.js'
-import { get, post } from '../utils/http'
+import { deleteFn, get, post, put } from '../utils/http'
 
 import { service } from '@/utils/request'
 
@@ -49,6 +49,24 @@ export function classifyList(data) {
 export function addClassify(data) {
   return post(baseUrl.api + '/classify/add', data)
 }
+
+// 分类详情
+export function classifyDetail(id) {
+  return get(baseUrl.api + `/classify/detail/${id}`)
+}
+
+// 更新分类
+export function classifyUpdate(data) {
+  return put(baseUrl.api + `/classify/update`, data)
+}
+
+
+// 删除分类
+export function classifyDelete(id) {
+  return deleteFn(baseUrl.api + `/classify/delete/${id}`)
+}
+
+
 
 
 // 分类下的商品列表

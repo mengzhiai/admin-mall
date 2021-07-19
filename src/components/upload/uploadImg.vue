@@ -2,7 +2,7 @@
  * @Date: 2021-03-20 14:16:22
  * @Description: 图片上传
  * @LastEditors: jun
- * @LastEditTime: 2021-07-04 00:09:04
+ * @LastEditTime: 2021-07-20 00:47:17
  * @FilePath: \admin-mall\src\components\upload\uploadImg.vue
 -->
 <template>
@@ -12,6 +12,7 @@
       list-type="picture-card"
       :limit="limitLen"
       :data="imgData"
+      :file-list="fileList"
       :class="{ 'no-upload': uploadImgList.length == limitLen }"
       :on-success="onSuccess"
       :before-upload="beforeUpload"
@@ -35,6 +36,12 @@ export default {
       type: Number,
       default: 1,
     },
+    fileList: {
+      type: Array,
+      default: (() => {
+        return []
+      })
+    }
   },
   data() {
     return {
@@ -67,11 +74,14 @@ export default {
     },
 
     handleRemove(file, fileList) {
+      console.log('file', file);
+      console.log('fileList', fileList);
+      this.fileList = fileList;
     },
 
     // 上传之前
     beforeUpload(file) {
-      const isJPG = file.type === "image/jpeg";
+      /* const isJPG = file.type === "image/jpeg";
       const isPng = file.type === "image/png";
       const isLt2M = file.size / 1024 / 1024 < 2;
 
@@ -82,7 +92,7 @@ export default {
       if (!isLt2M) {
         this.$message.error("上传头像图片大小不能超过 2MB!");
       }
-      return isJPG && isLt2M;
+      return isJPG && isLt2M; */
     },
 
     // 查看图片
@@ -107,7 +117,7 @@ export default {
       dataList.forEach((item, i) => {
         let obj = {
           index: i,
-          url: `http://img.jun666.cn/${item.response.key}`,
+          img: `http://img.jun666.cn/${item.response.key}`,
         };
         imgList.push(obj);
       });
@@ -115,9 +125,11 @@ export default {
     },
 
     getPicList() {
-      console.log('aa', this.uploadImgList);
-      let list = this.uploadImgList;
-      return list;
+      // let list = this.uploadImgList;
+      console.log('fileList', this.fileList);
+      console.log('uploadImgList', this.uploadImgList);
+      let arr = [...this.fileList, ...this.uploadImgList];
+      return arr;
     },
   },
 };

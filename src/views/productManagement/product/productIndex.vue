@@ -2,7 +2,7 @@
  * @Date: 2021-02-10 22:53:38
  * @Description: 产品管理
  * @LastEditors: jun
- * @LastEditTime: 2021-07-04 00:08:16
+ * @LastEditTime: 2021-07-20 00:37:22
  * @FilePath: \admin-mall\src\views\productManagement\product\productIndex.vue
 -->
 <template>
@@ -19,7 +19,7 @@
       <el-button type="default" @click="reset">重置</el-button>
     </el-form-item>
   </el-form>
-  <tableList ref="tableList" @editRow="editRow"></tableList>
+  <tableList ref="tableList" :statusList="statusList" @editRow="editRow"></tableList>
   <paging :pageSize="tablePage.pageSize" :totalNum="tablePage.total" :currentPage="tablePage.currentPage" @currentChange="currentChange"></paging>
   <el-dialog title="添加/编辑" :visible.sync="editDialog" width="1000px" :close-on-click-modal="false">
     <edit ref="edit" v-if="editDialog"></edit>
@@ -183,8 +183,12 @@ export default {
       this.editDialog = true;
       productDetail(id).then(res => {
         if (res.code === 200) {
+          let data = res.data;
+          data.imgList.forEach(item => {
+            item.url = item.img
+          })
           this.$nextTick(() => {
-            this.$refs.edit.editForm = res.data;
+            this.$refs.edit.editForm = data;
             this.$refs.edit.categoryList = this.categoryList;
           })
         }
@@ -196,6 +200,8 @@ export default {
       let val = this.$refs.edit.validateFrom();
       let params = this.$refs.edit.editForm;
       let list = this.$refs.edit.getPicList();
+      console.log('list', list);
+      params.imgList = list;
       console.log('params', params);
       if (!val) {
         this.$message.warning('请将必填项填写完整');

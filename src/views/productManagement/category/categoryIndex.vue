@@ -2,7 +2,7 @@
  * @Date: 2021-02-13 13:43:53
  * @Description: 分类管理
  * @LastEditors: jun
- * @LastEditTime: 2021-03-20 23:44:20
+ * @LastEditTime: 2021-07-18 13:55:51
  * @FilePath: \admin-mall\src\views\productManagement\category\categoryIndex.vue
 -->
 <template>
@@ -37,7 +37,10 @@ import paging from '@/components/paging/paging';
 import edit from './edit';
 import {
   classifyList,
-  addClassify
+  addClassify,
+  classifyDetail,
+  classifyUpdate,
+  classifyDelete
 } from "@/api/product";
 export default {
   components: {
@@ -93,13 +96,24 @@ export default {
     // 添加/编辑商品
     sumbit() {
       let params = this.$refs.edit.editForm;
-      addClassify(params).then(res => {
-        if(res.code === 200) {
-          this.getList(1);
-          this.editDialog = false;
-          this.$message.success(res.msg);
-        }
-      })
+      if (!params.id) {
+        addClassify(params).then(res => {
+          if (res.code === 200) {
+            this.getList(1);
+            this.editDialog = false;
+            this.$message.success(res.msg);
+          }
+        })
+      } else {
+        classifyUpdate(params).then(res => {
+          if(res.code === 200) {
+            this.getList(1);
+            this.editDialog = false;
+            this.$message.success(res.msg);
+          }
+        })
+      }
+
     },
 
     /**
@@ -109,22 +123,39 @@ export default {
      * @return {*}
      */
     editRow(id, type) {
-      if(type === '编辑') {
-        getDetail(id);
-      } else if(type === 'goods') {
+      if (type === 'edit') {
+        this.editDialog = true;
+        this.getDetail(id);
+      } else if (type === 'goods') {
         this.$router.push({
           name: 'goodsList',
           query: {
-            id:id
+            id: id
           }
         })
+      } else if (type === 'delete') {
+        this.getDelete(id);
       }
     },
 
-
     // 详情
     getDetail(id) {
+      classifyDetail(id).then(res => {
+        if (res.code === 200) {
+          this.$refs.edit.editForm = res.data;
+        }
+      })
+    },
 
+    getDelete(id) {
+      this.$handleConfirm('确定要删除吗?').then(() => {
+        classifyDelete(id).then(res => {
+          if (res.code === 200) {
+            this.getList(1);
+            this.$handleMessage('删除成功');
+          }
+        })
+      }).catch(() => {})
     }
   },
 };

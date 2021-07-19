@@ -2,7 +2,7 @@
  * @Date: 2021-02-14 12:39:02
  * @Description: 新增/编辑
  * @LastEditors: jun
- * @LastEditTime: 2021-07-06 23:44:27
+ * @LastEditTime: 2021-07-20 00:32:42
  * @FilePath: \admin-mall\src\views\productManagement\product\edit.vue
 -->
 <template>
@@ -60,7 +60,7 @@
       <uploadPic ref="goodsPic" :imgUrl="editForm.img" @successImg="successImg" :limit="1"></uploadPic>
     </el-form-item>
     <el-form-item label="商品展示图片:">
-      <uploadExhibition ref="uploadExhibition" :limitLen="4"></uploadExhibition>
+      <uploadExhibition ref="uploadExhibition" :fileList="editForm.imgList" :limitLen="4"></uploadExhibition>
     </el-form-item>
     <el-form-item label="商品详情:">
       <editor :option="option" v-model="editForm.detailContent"></editor>
