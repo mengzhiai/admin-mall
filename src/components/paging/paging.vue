@@ -2,7 +2,7 @@
  * @Date: 2021-02-14 12:30:44
  * @Description: 分页组件
  * @LastEditors: jun
- * @LastEditTime: 2021-02-14 12:35:03
+ * @LastEditTime: 2021-07-21 00:32:40
  * @FilePath: \admin-mall\src\components\paging\paging.vue
 -->
 <template>
@@ -40,5 +40,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.xm-page {
+  padding-top: 10px;
+}
 </style>

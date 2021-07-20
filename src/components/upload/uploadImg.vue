@@ -2,33 +2,24 @@
  * @Date: 2021-03-20 14:16:22
  * @Description: 图片上传
  * @LastEditors: jun
- * @LastEditTime: 2021-07-20 00:47:17
+ * @LastEditTime: 2021-07-20 23:27:55
  * @FilePath: \admin-mall\src\components\upload\uploadImg.vue
 -->
 <template>
-  <div class="upload-img">
-    <el-upload
-      :action="$uploadUrl"
-      list-type="picture-card"
-      :limit="limitLen"
-      :data="imgData"
-      :file-list="fileList"
-      :class="{ 'no-upload': uploadImgList.length == limitLen }"
-      :on-success="onSuccess"
-      :before-upload="beforeUpload"
-      :on-preview="handlePictureCardPreview"
-      :on-remove="handleRemove"
-    >
-      <i class="el-icon-plus"></i>
-    </el-upload>
-    <el-dialog :visible.sync="dialogVisible" append-to-body>
-      <img width="100%" :src="dialogImageUrl" alt="" />
-    </el-dialog>
-  </div>
+<div class="upload-img">
+  <el-upload :action="$uploadUrl" list-type="picture-card" :limit="limitLen" :data="imgData" :file-list="fileList" :class="{ 'no-upload': uploadImgList.length == limitLen }" :on-success="onSuccess" :before-upload="beforeUpload" :on-preview="handlePictureCardPreview" :on-remove="handleRemove">
+    <i class="el-icon-plus"></i>
+  </el-upload>
+  <el-dialog :visible.sync="dialogVisible" append-to-body>
+    <img width="100%" :src="dialogImageUrl" alt="" />
+  </el-dialog>
+</div>
 </template>
 
 <script>
-import { uploadToken } from "@/api/common";
+import {
+  uploadToken
+} from "@/api/common";
 export default {
   props: {
     // 图片上传个数限制
@@ -63,6 +54,9 @@ export default {
 
   created() {
     this.getToken();
+  },
+  mounted() {
+    console.log('aaa', this.fileList);
   },
   methods: {
     getToken() {
@@ -102,34 +96,38 @@ export default {
     },
 
     onSuccess(response, file, fileList) {
-      this.uploadImgList = fileList;
+      console.log('fileList', fileList);
+      /* this.uploadImgList = fileList;
       this.imgData.key = 'mall' + new Date().getTime();
       if (this.limitLen >= 1) {
         this.disposeData(fileList);
       } else {
         let url = `http://img.jun666.cn/${response.key}`;
         this.$emit("successImg", url);
-      }
+      } */
+      this.getDateTime();
+      this.disposeData(fileList);
     },
 
     disposeData(dataList) {
-      let imgList = [];
       dataList.forEach((item, i) => {
-        let obj = {
-          index: i,
-          img: `http://img.jun666.cn/${item.response.key}`,
-        };
-        imgList.push(obj);
+        if (item.response) {
+          item.img = `http://img.jun666.cn/${item.response.key}`;
+        }
       });
-      this.uploadImgList = imgList;
+      this.uploadImgList = dataList;
+    },
+
+    getDateTime() {
+      this.imgData.key = 'mall' + new Date().getTime()
     },
 
     getPicList() {
-      // let list = this.uploadImgList;
-      console.log('fileList', this.fileList);
-      console.log('uploadImgList', this.uploadImgList);
-      let arr = [...this.fileList, ...this.uploadImgList];
-      return arr;
+      let list = this.uploadImgList;
+      // console.log('fileList', this.fileList);
+      // console.log('uploadImgList', this.uploadImgList);
+      // let arr = [...this.fileList, ...this.uploadImgList];
+      return list;
     },
   },
 };

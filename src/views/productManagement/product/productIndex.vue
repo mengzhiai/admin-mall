@@ -2,7 +2,7 @@
  * @Date: 2021-02-10 22:53:38
  * @Description: 产品管理
  * @LastEditors: jun
- * @LastEditTime: 2021-07-20 00:37:22
+ * @LastEditTime: 2021-07-20 23:13:13
  * @FilePath: \admin-mall\src\views\productManagement\product\productIndex.vue
 -->
 <template>
@@ -190,6 +190,8 @@ export default {
           this.$nextTick(() => {
             this.$refs.edit.editForm = data;
             this.$refs.edit.categoryList = this.categoryList;
+            // console.log('this.$refs.edit', this.$refs.edit.$refs.uploadExhibition.uploadImgList);
+            this.$refs.edit.$refs.uploadExhibition.uploadImgList = data.imgList;
           })
         }
       })
