@@ -2,7 +2,7 @@
  * @Date: 2021-02-10 22:49:04
  * @Description: 路由
  * @LastEditors: jun
- * @LastEditTime: 2021-07-04 00:49:25
+ * @LastEditTime: 2021-07-26 23:08:41
  * @FilePath: \admin-mall\src\router\index.js
  */
 import Vue from 'vue'
@@ -126,24 +126,25 @@ const routes = [
 ]
 
 const router = new VueRouter({
+  mode: 'hash',
   routes
 })
 
 export default router
 
 
-router.beforeEach((to, from, next) => {
-  if (to.path == '/login') {
-    next();
-  } else {
-    let token = localStorage.getItem('token');
-    if (!token) {
-      next('/login');
-    } else {
-      next();
-    }
-  }
-})
+// router.beforeEach((to, from, next) => {
+//   if (to.path == '/login') {
+//     next();
+//   } else {
+//     let token = localStorage.getItem('token');
+//     if (!token) {
+//       next('/login');
+//     } else {
+//       next();
+//     }
+//   }
+// })
 
 
 
