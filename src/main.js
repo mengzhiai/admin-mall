@@ -2,7 +2,7 @@
  * @Date: 2021-02-10 22:49:04
  * @Description: 
  * @LastEditors: jun
- * @LastEditTime: 2021-07-09 00:23:18
+ * @LastEditTime: 2021-07-30 01:15:35
  * @FilePath: \admin-mall\src\main.js
  */
 import Vue from 'vue'
@@ -36,6 +36,10 @@ Vue.use(mixin);
 import { handleConfirm, handleMessage } from './utils/element';
 Vue.prototype.$handleConfirm = handleConfirm;
 Vue.prototype.$handleMessage = handleMessage;
+
+
+import local from './utils/local';
+Vue.prototype.$local = local;
 
 Vue.use(ElementUI)
 

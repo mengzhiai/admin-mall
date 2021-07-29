@@ -2,7 +2,7 @@
  * @Date: 2021-02-12 23:55:32
  * @Description: 主页
  * @LastEditors: jun
- * @LastEditTime: 2021-07-04 00:52:31
+ * @LastEditTime: 2021-07-30 01:24:57
  * @FilePath: \admin-mall\src\views\home\index.vue
 -->
 <template>
@@ -12,7 +12,7 @@
   </div>
   <div class="container flex">
     <div class="menu">
-      <el-menu class="menu-list" @open="handleOpen" @close="handleClose" :unique-opened="true" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
+      <el-menu class="menu-list" :default-active="defaultActive" router @open="handleOpen" @close="handleClose" :unique-opened="true" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
         <el-submenu :index="item.menuIndex" v-for="(item, index) in menuList" :key="index">
           <template slot="title">{{ item.name }}</template>
           <el-menu-item class="item" :index="ele.childrenIndex" v-for="(ele, i) in item.children" :key="i" @click="clickMenu(ele)">{{ ele.childName }}</el-menu-item>
@@ -39,6 +39,7 @@
 export default {
   data() {
     return {
+      defaultActive: '',
       menuList: [{
           menuIndex: "1",
           name: "产品管理",
@@ -58,18 +59,18 @@ export default {
           menuIndex: "4",
           name: "轮播图管理",
           children: [{
-              childrenIndex: "4-1",
-              childName: "首页轮播图",
-              nameVal: "bannerIndex",
-            }
-          ],
+            childrenIndex: "4-1",
+            childName: "首页轮播图",
+            nameVal: "bannerIndex",
+          }],
         },
         {
           menuIndex: "2",
           name: "订单管理",
           children: [{
               childrenIndex: "2-1",
-              childName: "订单类别",
+              childName: "订单列表",
+              nameVal: "order",
             },
             {
               childrenIndex: "2-2",
@@ -95,11 +96,16 @@ export default {
       ],
     };
   },
+  mounted() {
+    console.log(this.$local.get('defaultActive'));
+    this.defaultActive = this.$local.get('defaultActive');
+  },
   methods: {
     handleOpen() {},
     handleClose() {},
 
     clickMenu(ele) {
+      this.$local.set('defaultActive', ele.childrenIndex)
       this.$router.push({
         name: ele.nameVal,
       });

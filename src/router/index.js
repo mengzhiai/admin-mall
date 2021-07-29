@@ -2,7 +2,7 @@
  * @Date: 2021-02-10 22:49:04
  * @Description: 路由
  * @LastEditors: jun
- * @LastEditTime: 2021-07-26 23:08:41
+ * @LastEditTime: 2021-07-30 01:02:31
  * @FilePath: \admin-mall\src\router\index.js
  */
 import Vue from 'vue'
@@ -87,6 +87,19 @@ const routes = [
             },
             {
               title: '首页轮播图'
+            }
+          ]
+        }
+      },
+      {
+        path: '/order',
+        name: 'order',
+        component: () => import('../views/orderManage/orderList/orderIndex'),
+        meta: {
+          auth: true,
+          crumbsList: [
+            {
+              title: '订单管理'
             }
           ]
         }
